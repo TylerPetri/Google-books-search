@@ -1,0 +1,16 @@
+function fetchJSON( url, method='get', data={} ){
+    const fetchOptions = {
+        method,
+        headers: {
+            'Content-Type': 'application/json',
+            'Session': localStorage.session || ''
+        }
+    }
+    if( method === 'post' || method === 'put' ) {
+        fetchOoptions.body = JSON.stringify( data )
+    }
+
+    return fetch( url,fetchOptions ).then( r=>r.json())
+}
+
+export default fetchJSON
