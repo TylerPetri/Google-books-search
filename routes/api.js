@@ -1,11 +1,10 @@
 const router = require('express').Router();
-const mongoose = require('mongoose');
-const { Books } = require('../models/index');
+const  Books  = require('../models/books');
 
 router.get('/api/books', (req,res) => {
     Books.find({})
-    .then( r => {
-        res.json(r);
+    .then( booksDB => {
+        res.json(booksDB);
       })
     .catch((err) => {
         res.json(err);
@@ -13,7 +12,7 @@ router.get('/api/books', (req,res) => {
 })
 
 router.post('/api/books', (req,res) => {
-    Books.insertOne({})
+    Books.create({})
     .then( r => {
         res.json(r);
       })

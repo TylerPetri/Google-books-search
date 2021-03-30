@@ -1,27 +1,24 @@
 import { useState, useEffect } from 'react'
 import './saved.css'
+import fetchJSON from '../../util/API'
 
 function Saved() {
 
 const [bookList, setBookList ] = useState([])
 
-// function loadBooks() {
 
-// }
+async function loadBooks() {
+    const data = await fetchJSON('/api/books');
+    setBookList(data)    
+}
+
+useEffect(function(){
+    loadBooks()
+}, [])
 
 
     return (
         <>
-        <nav className="nav">
-            <div className="dev">
-                Google Books
-            </div>
-            <div className="nav-items">
-                <a className="nav-link">Search</a>
-                <a className="nav-link">Saved</a>
-            </div>
-        </nav>
-
         <div className="intro">
             <h1>(React) Google Books Search</h1>
             <h4>Search for and Save books of Internet</h4>
@@ -31,7 +28,14 @@ const [bookList, setBookList ] = useState([])
             <h6>Saved books</h6>
             <div className="list">
                 {/* <---list---> */}
-                <div className="books"></div>
+            {bookList.map( (book,idx)=> {
+                return(
+                    <ul key={idx}className="books">
+                        <li>{book.title}</li>
+                        <li>{book.description}</li>
+                    </ul>
+                    )}
+                )}
             </div>
         </div>
         </>
