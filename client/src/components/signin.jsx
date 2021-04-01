@@ -22,9 +22,6 @@ function SignInPage(){
           fetchOptions.body = JSON.stringify(data)
         
         await fetch('/login', fetchOptions).then(r=>r.json())
-        
-        console.log(data)
-        console.log(fetchOptions.body)
     }
 
     return(
