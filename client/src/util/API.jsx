@@ -11,6 +11,7 @@ function fetchJSON( url, method='get', data={} ){
     }
 
     return fetch( url,fetchOptions ).then( r=>r.json())
+    
 }
 
 export default fetchJSON

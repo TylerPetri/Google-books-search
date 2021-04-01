@@ -18,3 +18,8 @@ h6 {
 .list {
     margin: 0 25px 40px 25px;
 }
+
+.authorsN {
+    padding-top: 3px;
+    margin-left: 10px;
+}
