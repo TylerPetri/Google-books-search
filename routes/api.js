@@ -99,7 +99,7 @@ router.post('/login', (req,res) => {
               email: user[0].email,
               userId: user[0]._id,
             },
-            process.env.JWT_KEY,
+            'secret',
             {
               expiresIn: "1h",
             }
