@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import axios from "axios";
-import './search.css'
+import './styles.css'
+import fetchJSON from '../util/API';
 
 function Search() {
 
@@ -15,7 +16,7 @@ function Search() {
     }
 
     function saveBook(res){
-        console.log(res.title)
+        fetchJSON('/api/books', 'post', res)
     }
 
     function renderDesc(book){
@@ -26,24 +27,6 @@ function Search() {
     function handleEnterKey(e) {
         if (e.key === "Enter") performSearch();
       }
-
-    function renderResults(){
-        if(searchResults.length > 0) { return searchResults.map( (book, idx) => {
-            return (
-                <div key={idx} className="card">
-                        <button className="cardBtn" onClick={()=>saveBook(book.volumeInfo)}>Save</button>
-                        <a href={book.volumeInfo.previewLink} target="_blank" rel="noreferrer">
-                            <button className="cardBtn">View</button>
-                        </a>
-                        <img src={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail || ''} alt="thumbnail"/>
-                    <div className="title">{book.volumeInfo.title}</div>
-                    <div className="desc" >{renderDesc(book)}</div>
-                </div>
-            )
-        })
-    } else {return <h2>No results found</h2>}
-   
-    }
 
         return (
             <>    
@@ -56,7 +39,22 @@ function Search() {
     
             <div className="listBoxx">
                     {/* <---list---> */}
-                {renderResults()}
+                {searchResults.length > 0 ? searchResults.map( (book, idx) => {
+                    return (
+                        <div key={idx} className="card">
+                                <button className="cardBtn" onClick={()=>saveBook(book.volumeInfo)}>Save</button>
+                                <a href={book.volumeInfo.previewLink} target="_blank" rel="noreferrer">
+                                    <button className="cardBtn">View</button>
+                                </a>
+                                <img src={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail || ''} alt="thumbnail"/>
+                            <div className="title">{book.volumeInfo.title}</div>
+                            <div className="desc" >{renderDesc(book)}</div>
+                        </div>
+                    )
+                })
+                :
+                    <h2 className="noResults">No results found</h2>
+                }
             </div>
             </>
         )

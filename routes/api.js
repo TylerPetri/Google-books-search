@@ -1,3 +1,9 @@
+require("dotenv").config();
+
+const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const { User } = require('../models/index.js')
 const router = require('express').Router();
 const  Books  = require('../models/books');
 const checkAuth = require('./auth')
@@ -13,23 +19,23 @@ router.get('/api/books', checkAuth, (req,res) => {
 })
 
 router.post('/api/books', (req,res) => {
-    Books.create({})
-    .then( r => {
-        res.json(r);
-      })
-    .catch( err => {
-        res.json(err)
-      })
+  let aut = req.body.authors
+ new Books({
+      title: req.body.title,
+      authors: [{name: aut[0]}, {name: aut[1]}, {name: aut[2]}, {name: aut[3]}],
+      description: req.body.description,
+      image: req.body.imageLinks.thumbnail,
+      link: req.body.previewLink
+    }).save()
+  
+    res.send('success')
 })
 
-
-require("dotenv").config();
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const { User } = require('../models/index.js')
-
-
+router.delete("/api/books/:id", async (req,res) => {
+  console.log(req.params.id)
+  await Books.deleteOne({_id: req.params.id});
+  res.send("Success");
+})
 
 
 router.post('/signup', (req,res) => {

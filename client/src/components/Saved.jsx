@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import './saved.css'
-import fetchJSON from '../../util/API'
+import './styles.css'
+import fetchJSON from '../util/API'
 // import { Redirect } from 'react-router-dom'
 
 
@@ -24,7 +24,7 @@ useEffect(function(){
 }, [])
 
 function deleteB(idx){
-    console.log(idx)
+    fetchJSON(`/api/books/${idx}`, 'delete')
 }
 
 function renderDesc(book){
@@ -36,13 +36,10 @@ function renderDesc(book){
     return (
         <>
         <div className="intro">
-            <h1>(React) Google Books Search</h1>
-            <h4>Search for and Save books of Internet</h4>
+            <h3>Saved books</h3>
         </div>
 
         <div className="listBox">
-            <h6>Saved books</h6>
-            <div className="list">
                 {/* <---list---> */}
             
             { bookList.length > 0 ? bookList.map( (book,idx)=> {
@@ -52,9 +49,11 @@ function renderDesc(book){
                             <a href={book.link} target="_blank" rel="noreferrer">
                                 <button className="cardBtn">View</button>
                             </a>
-                            <img src={book.image || ''} alt="thumbnail" style={{width:'100%'}}/>
+                            <div className="imgAut">
+                                <img src={book.image || ''} alt="thumbnail"/>
+                                <div className="authors"><h5>Authors</h5>{book.authors.map((names, idx) => {return (<div key={idx} className="authorsN">{names.name}</div>)})}</div>
+                            </div>
                         <div className="title">{book.title}</div>
-                        <div className="authors">{book.authors.map((names, idx) => {return (<div key={idx} className="authorsN">{names.name}</div>)})}</div>
                         <div className="desc">{renderDesc(book)}</div>
                     </div>
                     )}
@@ -66,7 +65,6 @@ function renderDesc(book){
                 <h2>No saved books</h2>
                 </>
                 } 
-            </div>
         </div>
         </>
     )

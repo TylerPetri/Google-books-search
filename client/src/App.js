@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Search from './components/search/Search'
-import Saved from './components/saved/Saved'
-import Navbar from './components/navbar/Navbar'
+import Search from './components/Search'
+import Saved from './components/Saved'
+import Navbar from './components/Navbar'
 import SignUp from './components/signup'
 import Login from './components/signin'
 
