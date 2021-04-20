@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import axios from "axios";
-import './styles.css'
-import fetchJSON from '../util/API';
+import './Search.css'
+import fetchJSON from '../../utils/API';
 
 function Search() {
 

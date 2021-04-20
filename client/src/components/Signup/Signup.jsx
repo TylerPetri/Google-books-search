@@ -1,17 +1,17 @@
 import { useRef } from 'react'
-import './styles.css'
+import '../styles.css'
 
 
-function SignInPage(){
+function SignUpPage(){
 
     const userRef = useRef()
     const passRef = useRef()
 
-    async function signin(e){
+    async function signup(e){
         e.preventDefault()
 
         const data = {
-            email: userRef.current.value,
+            username: userRef.current.value,
             password: passRef.current.value
         }
 
@@ -21,7 +21,10 @@ function SignInPage(){
           }
           fetchOptions.body = JSON.stringify(data)
         
-        await fetch('/login', fetchOptions).then(r=>r.json())
+        await fetch('/signup', fetchOptions).then(r=>r.json())
+
+        console.log(data)
+        console.log(fetchOptions.body)
     }
 
     return(
@@ -35,10 +38,10 @@ function SignInPage(){
                     <label htmlFor="password" className="form-label">Password</label>
                     <input type="password" className="form-control" ref={passRef}/>
                 </div>
-                <button className="signupBTN" onClick={signin}>Login</button>
+                <button className="signupBTN" onClick={signup}>Sign up</button>
             </form>
         </div>
     )
 }
 
-export default SignInPage
+export default SignUpPage

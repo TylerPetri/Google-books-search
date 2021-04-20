@@ -39,12 +39,12 @@ router.delete("/api/books/:id", async (req,res) => {
 
 
 router.post('/signup', (req,res) => {
-    User.find({email: req.body.email})
+    User.find({username: req.body.username})
         .exec()
         .then(user => {
             if (user.length > 0) {
                 return res.status(409).json({
-                    message: 'Mail exists'
+                    message: 'User exists'
                 })
             } else {
             bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -55,7 +55,7 @@ router.post('/signup', (req,res) => {
                 } else {
                     const user = new User({
                         _id: mongoose.Types.ObjectId(),
-                        email: req.body.email,
+                        username: req.body.username,
                         password: hash
                     })
                     user
@@ -79,7 +79,7 @@ router.post('/signup', (req,res) => {
 })
 
 router.post('/login', (req,res) => {
-    User.find({ email: req.body.email })
+    User.find({ username: req.body.username })
     .exec()
     .then(user => {
         if (user.length < 1) {
@@ -96,7 +96,7 @@ router.post('/login', (req,res) => {
         if (result) {
           const token = jwt.sign(
             {
-              email: user[0].email,
+              username: user[0].username,
               userId: user[0]._id,
             },
             process.env.JWT_KEY,

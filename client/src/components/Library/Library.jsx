@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import './styles.css'
-import fetchJSON from '../util/API'
+import '../styles.css'
+import fetchJSON from '../../utils/API'
 // import { Redirect } from 'react-router-dom'
 
 

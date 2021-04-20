@@ -6,28 +6,6 @@
     align-items: center;
 }
 
-.searchContainer {
-    text-align: center;
-    margin: 40px;
-}
-
-.searchBar {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    height: max-content;
-}
-
-.searchBtn {
-    height:36px;
-}
-
-input {
-    height:30px;
-    width: 300px;
-}
-
 .listBox {
     margin: 40px;
     display: flex;
@@ -94,31 +72,6 @@ h6 {
 .authorsN {
     padding-top: 3px;
     margin-left: 10px;
-}
-
-.nav {
-    height: 55px;
-    border-bottom: 2px solid black;
-    display: flex;
-    align-items: center
-}
-
-.dev {
-    font-size: 30px;
-    padding: 0 20px;
-}
-
-.nav-items {
-    font-size: 23px;
-    padding: 0 10px;
-    width: 300px;
-    display: flex;
-    justify-content: space-between
-}
-
-.nav-link {
-    text-decoration: none;
-    color: black;
 }
 
 .imgAut {
