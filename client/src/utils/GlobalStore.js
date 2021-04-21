@@ -9,7 +9,7 @@ const initialData = {
   rightMarg: false,
   searchResults: {},
   modal: false,
-  log: false
+  log: false,
 }
 
 const dataReducer = (state, action) => {

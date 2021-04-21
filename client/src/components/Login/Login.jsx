@@ -1,4 +1,4 @@
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react'
 import './Login.css'
 import { useStoreContext } from "../../utils/GlobalStore"
@@ -9,22 +9,12 @@ function LoginForm(props){
   const [authFail, setAuthFail] = useState(false)
   const userRef = useRef()
   const passRef = useRef()
-  let history = useHistory()
   let pcUser = ''
 
-
-  // function toggleModal(){
-  //   setShowModal(true)
-  // }
 
   function dismissModal (){
     dispatch({type:'HIDE_MODAL'})
   }
-
-  // function logout(){
-  //   setLog(false)
-  //   dispatch({type:"USER_LOGOUT"})
-  // }
 
   useEffect(function(){
     if (localStorage.getItem("email") !== null) {
@@ -59,7 +49,6 @@ function LoginForm(props){
       localStorage.email = email
       pcUser = email
       dispatch({ type: 'USER_LOGIN', data: {name:email, token: token }})
-      history.push('/publicChat')
       dispatch({type: "HIDE_MODAL"})
       dispatch({type: 'LOG_TRUE'})
     } else if ( message === 'No such being!' || 'Wrong password') {
@@ -70,22 +59,10 @@ function LoginForm(props){
 
     return (
         <>
-        {/* {log ? <button type="button" className="signinBtn" onClick={logout}>
-                    Sign out
-          </button>
-          :
-          <div className="logdiv">
-            <button type="button" className="signinBtn" onClick={toggleModal}>
-                      Sign in
-            </button> 
-          </div>
-          } */}
-          
-
         <div className="modalSign" style={{display: modal === true ? 'block' : 'none'}}>
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Log in</h5>
+                <h5 className="modal-title" id="exampleModalLabel">Sign in</h5>
                 <h6 className="authFail" style={{display: authFail ? 'block' : 'none'}}>Wrong username or password</h6>
                 <button className="btn closeModal" onClick={dismissModal}>&times;</button>
               </div>
