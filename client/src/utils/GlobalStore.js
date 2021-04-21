@@ -10,7 +10,6 @@ const initialData = {
   searchResults: {}
 }
 
-/*! IMPORTANT all your reducer functionality goes here */
 const dataReducer = (state, action) => {
   switch (action.type) {
     case "ALREADY_SIGNEDIN":

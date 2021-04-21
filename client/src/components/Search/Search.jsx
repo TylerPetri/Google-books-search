@@ -1,6 +1,8 @@
 import { useStoreContext } from '../../utils/GlobalStore'
+import { GiBookshelf } from 'react-icons/gi'
 import './Search.css'
 import fetchJSON from '../../utils/API';
+import noimg from '../../img/noimg.jpg'
 
 function Search() {
 
@@ -12,11 +14,7 @@ function Search() {
 
     function renderDesc(book){
             if(!book.volumeInfo.description) return "(No description)";
-            else return book.volumeInfo.description.slice(0,100) + "..."
-    }
-
-    function test(){
-        console.log(searchResults)
+            else return book.volumeInfo.description.slice(0,250) + "..."
     }
 
         return (
@@ -26,13 +24,18 @@ function Search() {
                 {searchResults.length > 0 ? searchResults.map( (book, idx) => {
                     return (
                         <div key={idx} className="card">
-                                <button className="cardBtn" onClick={()=>saveBook(book.volumeInfo)}>Save</button>
-                                <a href={book.volumeInfo.previewLink} target="_blank" rel="noreferrer">
-                                    <button className="cardBtn">View</button>
-                                </a>
-                                <img src={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail || ''} alt="thumbnail"/>
+                                <GiBookshelf className="saveBtn" onClick={()=>saveBook(book.volumeInfo)}/>
+                                {book.volumeInfo.imageLinks ? 
+                                <img src={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail || ''} className="thumbnailImg" alt="thumbnail"/>
+                                :
+                                <img className="nothumbnailImg" src={noimg} alt="no image available"/>
+                                }
+                                
                             <div className="title">{book.volumeInfo.title}</div>
-                            <div className="desc" >{renderDesc(book)}</div>
+                            <div className="desc" ><p>{renderDesc(book)}</p></div>
+                            <a href={book.volumeInfo.previewLink} target="_blank" rel="noreferrer" className="linkBtn">
+                                 <h5>View details on Google page</h5>
+                            </a>
                         </div>
                     )
                 })

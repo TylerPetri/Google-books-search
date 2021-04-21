@@ -9,37 +9,76 @@
 .card {
     width:400px;
     height:500px;
-    background-color: greenyellow;
+    background-color: rgb(255, 201, 130);
+    border: 15px solid sienna;
     margin: 10px;
-    border-radius: 5px;
     position: relative;
     overflow: hidden;
+    border-radius: 0;
+    display: grid;
+    grid-template-columns: 35px auto 35px;
+    grid-template-rows: max-content max-content max-content 30px;
 }
 
-.title {
+.title {    
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
     padding: 10px;
     font-size: 20px;
 }
 
-.desc {
+.desc {    
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
     padding: 10px;
     overflow: hidden;
     height: 100px;
+
+}
+
+.saveBtn {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin: 10px;
+    height: 20px;
+    width: 20px;
+}
+
+.thumbnailImg {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    justify-self: center;
+}
+
+.nothumbnailImg {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    justify-self: center;
+    width: 60%;
+}
+
+.linkBtn {
     position: absolute;
     bottom: 0;
-    border-radius: 5px;
+    width: 100%;
+    justify-self: center;
+    background-color: rgb(255, 201, 130);
+    color: rgb(0, 140, 255)
 }
 
-.cardBtn {
-    float:right;
-    height:25px;
-    background-color: rgb(0, 195, 255);
-    border: .5px solid lightgrey;
-    border-radius: 5px;
-}
-
-.cardBtn:hover{
-    opacity: 0.7
+.linkBtn:hover {
+    text-decoration: none;
+    color: rgb(0, 140, 255)
 }
 
 .wrapper {
@@ -48,4 +87,5 @@
     justify-content: center;
     text-align: center;
     align-items: center;
+    min-height: max-content;
 }
