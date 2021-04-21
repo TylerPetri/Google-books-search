@@ -12,17 +12,16 @@ h6 {
     height: 100%; 
     overflow: auto; 
     background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+    background-color: rgba(0,0,0,0.6); 
     color:black;
     margin: 0 auto;
 }
 
 .modal-content {
     position: relative;
-    background-color: #fefefe;
+    background-color: rgba(0,0,0,0.85);
     margin: auto;
     padding: 0;
-    border: 1px solid #888;
     width: 500px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
@@ -40,6 +39,12 @@ h6 {
     from {top:-300px; opacity:0}
     to {top:0; opacity:1}
   }
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
 
 .signupA {
     color: black;
@@ -63,7 +68,7 @@ h6 {
 }
 
 .modalBody{
-    padding: 15px;
+    padding: 0 15px 15px;
 }
 
 .containerModal {
@@ -76,7 +81,7 @@ h6 {
 }
 
 .closeModal {
-    color:black;
+    color:orange;
     float: right;
     line-height: .5;
     font-size: 28px;
@@ -90,13 +95,35 @@ h6 {
 }
 
 .authFail {
-    color: red
+    color: rgb(224, 105, 253);
+    margin-bottom: 0;
 }
 
 .logdiv {
     display: flex;
     gap: 5px;
     margin-left: 10px;
+}
+
+.signinModal {
+    height: 45px;
+    width: 95px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 2px solid rgb(175, 120, 69);
+    background-color: rgb(0, 140, 255);
+    color:rgb(9, 47, 78);
+    font-weight: bold;
+}
+
+.signinModal:hover {
+    cursor: pointer;
+    background-color: rgb(9, 47, 78);
+    color: rgb(0, 140, 255);
+}
+
+.signinModal:focus {
+    outline: none;
 }
 
 .signinBtn {

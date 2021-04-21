@@ -54,16 +54,21 @@ function LoginForm(props){
     } else if ( message === 'No such being!' || 'Wrong password') {
       passRef.current.value = ''
       setAuthFail(true)
+      failreq()
     }
+  }
+
+  function failreq(){
+    setTimeout(()=>setAuthFail(false), 3000)
   }
 
     return (
         <>
         <div className="modalSign" style={{display: modal === true ? 'block' : 'none'}}>
             <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Sign in</h5>
-                <h6 className="authFail" style={{display: authFail ? 'block' : 'none'}}>Wrong username or password</h6>
+              <div className="modalHeader">
+                <h5 className="modal-title modalTitle" id="exampleModalLabel"></h5>
+                <h6 className="authFail" style={{display: authFail ? 'block' : 'none'}}>Incorrect username or password</h6>
                 <button className="btn closeModal" onClick={dismissModal}>&times;</button>
               </div>
               <div className="modalBody">
@@ -71,16 +76,26 @@ function LoginForm(props){
                   <div className="containerModal">
                     <form className="modalForm">
                       <div className="mb-3">
-                        <label htmlFor="enteruse" className="form-label">Username</label>
+                        <label htmlFor="enteruse" className="form-label">
+                          <div className="labels">
+                            <h3 className="dev1">User</h3>
+                            <h3 className="dev2">name</h3>
+                          </div>
+                        </label>
                         <input className="form-control" ref={userRef}/>
                       </div>
                       <div className="mb-3">
-                        <label htmlFor="enterpass" className="form-label">Password</label>
+                        <label htmlFor="enterpass" className="form-label">
+                          <div className="labels">
+                            <h3 className="dev1">User</h3>
+                            <h3 className="dev2">name</h3>
+                          </div>
+                        </label>
                         <input type="password" className="form-control" ref={passRef}/>
                       </div>
                       <div className="signLogCont">
                       <Link to='/signup' className="signupA" onClick={dismissModal}>Sign up</Link>
-                      <button className="btn btn-primary" onClick={login}>Sign in</button>
+                      <button className="signinModal" onClick={login}>Sign in</button>
                       </div>
                     </form>
                   </div>

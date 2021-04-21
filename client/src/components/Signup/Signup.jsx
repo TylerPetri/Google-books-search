@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import Login from '../Login/Login'
 import './Signup.css'
 
 
@@ -26,9 +27,6 @@ function SignUpPage(){
         
         const res = await fetch('/signup', fetchOptions).then(r=>r.json())
 
-        // console.log(data)
-        // console.log(fetchOptions.body)
-        console.log(res)
         if(res.error) {
             setRequired(true)
             uprequire()
@@ -42,6 +40,8 @@ function SignUpPage(){
     }
 
     return(
+        <>
+        <Login/>
         <div className="signUpContainer">
             <form className="signUpForm">
                 <h5 className="upr" style={{display: required ? 'block' : 'none'}}>Username & password required</h5>
@@ -66,6 +66,7 @@ function SignUpPage(){
                     <button className="signupBTN" onClick={signup}>Sign up</button>
             </form>
         </div>
+        </>
     )
 }
 
