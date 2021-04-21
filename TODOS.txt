@@ -5,3 +5,6 @@ update library realtime when delete []
 more auth []
 clear signin inputs []
 "must be signed in for library" []
+
+sign in button changes to username []
+delete user []
