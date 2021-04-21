@@ -53,11 +53,14 @@
 .btnIconSearch {
     margin-top: 6px;
     line-height:1.4rem;
-    color: rgb(133, 133, 133);
+    color: rgb(170, 170, 170);
 }
 
-.searchBtn:hover {
-    cursor: pointer
+.searchBtn:hover,
+.searchBtn:hover .btnIconSearch {
+    cursor: pointer;
+    background-color: #dbdbdb;
+    color: rgb(133, 133, 133)
 }
 
 .searchBtn:focus {
@@ -98,6 +101,7 @@
     height: 40px;
     opacity: 0;
     transition: 0.3s;
+    border-radius: 3px;
     
     /* Position the tooltip */
     position: absolute;
@@ -110,7 +114,7 @@
 
 .navLink:hover ~ .libraryPopUp {
     visibility: visible;
-    opacity: 1
+    opacity: 0.85
 }
 
 .libraryPopUp:hover {
