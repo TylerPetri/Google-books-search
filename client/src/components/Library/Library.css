@@ -1,0 +1,25 @@
+.listLibrary {
+    margin: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.intro {
+    text-align: center;
+}
+
+.authors {
+    text-align: center;
+    width: 100%;
+}
+
+.authorsN {
+    padding-top: 3px;
+    margin-left: 10px;
+}
+
+.imgAut {
+    width: 100%;
+    display: flex;
+}

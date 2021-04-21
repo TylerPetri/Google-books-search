@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import '../styles.css'
+import './Library.css'
 import fetchJSON from '../../utils/API'
 // import { Redirect } from 'react-router-dom'
 
@@ -39,7 +39,7 @@ function renderDesc(book){
             <h3>Saved books</h3>
         </div>
 
-        <div className="listBox">
+        <div className="listLibrary">
                 {/* <---list---> */}
             
             { bookList.length > 0 ? bookList.map( (book,idx)=> {

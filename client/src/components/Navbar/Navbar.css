@@ -57,7 +57,7 @@
 }
 
 .searchBtn:hover,
-.searchBtn:hover .btnIconSearch {
+.searchBtn:hover {
     cursor: pointer;
     background-color: #dbdbdb;
     color: rgb(133, 133, 133)

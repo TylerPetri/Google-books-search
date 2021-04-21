@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import '../styles.css'
+import './Signup.css'
 
 
 function SignUpPage(){
@@ -28,7 +28,7 @@ function SignUpPage(){
     }
 
     return(
-        <div className="wrapper">
+        
             <form>
                 <div>
                     <label htmlFor="username" className="form-label">Username</label>
@@ -40,7 +40,6 @@ function SignUpPage(){
                 </div>
                 <button className="signupBTN" onClick={signup}>Sign up</button>
             </form>
-        </div>
     )
 }
 
