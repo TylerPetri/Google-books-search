@@ -22,7 +22,6 @@ router.post('/api/books', (req,res) => {
   let aut = req.body.authors
  new Books({
       title: req.body.title,
-      authors: [{name: aut[0]}, {name: aut[1]}, {name: aut[2]}, {name: aut[3]}],
       description: req.body.description,
       image: req.body.imageLinks.thumbnail,
       link: req.body.previewLink
@@ -77,45 +76,45 @@ router.post('/signup', (req,res) => {
 })
 
 router.post('/login', (req,res) => {
-    User.find({ username: req.body.username })
-    .exec()
-    .then(user => {
-        if (user.length < 1) {
-            return res.status(401).json({
-                message: 'Auth failed'
-            })
-        }
-        bcrypt.compare(req.body.password, user[0].password, (err, result)=> {
-        if (err) {
+  User.find({ username: req.body.username })
+  .exec()
+  .then(user => {
+      if (user.length < 1) {
           return res.status(401).json({
-            message:'Auth failed'
+              message: 'No such being!'
           })
-        }
-        if (result) {
-          const token = jwt.sign(
-            {
-              username: user[0].username,
-              userId: user[0]._id,
-            },
-            process.env.JWT_KEY,
-            {
-              expiresIn: "1h",
-            }
-          );
-           res.cookie('token', token, {httpOnly:true});
-           return res.status(200).json({message: "Auth successful"})
-        }
-        res.status(401).json({
-          message: 'Auth faied'
+      }
+      bcrypt.compare(req.body.password, user[0].password, (err, result)=> {
+      if (err) {
+        return res.status(401).json({
+          message:'Wrong password'
         })
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
+      }
+      if (result) {
+        const token = jwt.sign(
+          {
+            username: user[0].username,
+            userId: user[0]._id,
+          },
+          process.env.JWT_KEY,
+          {
+            expiresIn: "1h",
+          }
+        );
+        res.cookie('token', token, {httpOnly:true});
+        return res.status(200).json({message: "Auth successful", token, username: req.body.username})
+      }
+      res.status(401).json({
+        message: 'Auth failed'
+      })
     });
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json({
+      error: err,
+    });
+  });
 })
 
 

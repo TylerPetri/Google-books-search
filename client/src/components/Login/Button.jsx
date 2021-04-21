@@ -10,15 +10,17 @@ function LoginButton() {
       }
     
     function logout(){
-        dispatch({type:'LOG_FALSE'})
         dispatch({type:"USER_LOGOUT"})
       }
 
     return (
         <>
-        {log ? <button type="button" className="signinBtn" onClick={logout}>
+        {log ? 
+            <div className="logdiv">
+            <button type="button" className="signinBtn" onClick={logout}>
                     Sign out
             </button>
+            </div>
             :
             <div className="logdiv">
             <button type="button" className="signinBtn" onClick={toggleModal}>

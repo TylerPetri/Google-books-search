@@ -17,8 +17,8 @@ function LoginForm(props){
   }
 
   useEffect(function(){
-    if (localStorage.getItem("email") !== null) {
-      pcUser = localStorage.getItem("email")
+    if (localStorage.getItem("username") !== null) {
+      pcUser = localStorage.getItem("username")
       dispatch({type: 'LOG_TRUE'})
       }
     if(pcUser !== ''){
@@ -31,8 +31,8 @@ function LoginForm(props){
     e.preventDefault()
 
     const data = {
-        email: userRef.current.value,
-        password: passRef.current.value
+      username: userRef.current.value,
+      password: passRef.current.value
     }
 
     const fetchOptions = {
@@ -41,14 +41,14 @@ function LoginForm(props){
       }
       fetchOptions.body = JSON.stringify(data)
     
-    const {token, email, message} = await fetch('/login', fetchOptions).then(r=>r.json())
-    console.log(message)
+    const {token, username, message} = await fetch('/login', fetchOptions).then(r=>r.json())
+    console.log(token, username, message)
 
     if (message === 'Auth successful') {
       localStorage.token = token
-      localStorage.email = email
-      pcUser = email
-      dispatch({ type: 'USER_LOGIN', data: {name:email, token: token }})
+      localStorage.username = username
+      pcUser = username
+      dispatch({ type: 'USER_LOGIN', data: {name:username, token: token }})
       dispatch({type: "HIDE_MODAL"})
       dispatch({type: 'LOG_TRUE'})
     } else if ( message === 'No such being!' || 'Wrong password') {
@@ -82,16 +82,16 @@ function LoginForm(props){
                             <h3 className="dev2">name</h3>
                           </div>
                         </label>
-                        <input className="form-control" ref={userRef}/>
+                        <input className="form-control logInput" ref={userRef}/>
                       </div>
                       <div className="mb-3">
                         <label htmlFor="enterpass" className="form-label">
                           <div className="labels">
-                            <h3 className="dev1">User</h3>
-                            <h3 className="dev2">name</h3>
+                            <h3 className="dev1">Pass</h3>
+                            <h3 className="dev2">word</h3>
                           </div>
                         </label>
-                        <input type="password" className="form-control" ref={passRef}/>
+                        <input type="password" className="form-control logInput" ref={passRef}/>
                       </div>
                       <div className="signLogCont">
                       <Link to='/signup' className="signupA" onClick={dismissModal}>Sign up</Link>

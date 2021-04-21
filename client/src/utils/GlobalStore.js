@@ -20,10 +20,10 @@ const dataReducer = (state, action) => {
       return { ...state, ...action.data, alert: action.message || '', authOk: true }
     case "USER_LOGOUT":
       // needed to force this reload (else it just refreshed with invalid content)
-      localStorage.removeItem('email')
+      localStorage.removeItem('username')
       localStorage.removeItem('token')
-      window.location.href = '/'
-      return { ...initialData, alert: action.message || '' }
+      // window.location.href = '/'
+      return { ...state, name:"", token:"", log:false }
     case "NAV_CLOSE":
       return { ...state, opa:false, nav:false, rightMarg:false }
     case "NAV_OPEN":
