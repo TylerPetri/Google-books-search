@@ -3,7 +3,7 @@ function fetchJSON( url, method='get', data={} ){
         method,
         headers: {
             'Content-Type': 'application/json',
-            'Session': localStorage.session || ''
+            token: localStorage.getItem('token')
         }
     }
     if( method === 'post' || method === 'put' ) {

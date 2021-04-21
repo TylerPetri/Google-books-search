@@ -1,0 +1,7 @@
+mobile nav []
+including burger []
+save button lit up if save on load []
+update library realtime when delete []
+more auth []
+clear signin inputs []
+"must be signed in for library" []

@@ -19,7 +19,6 @@ router.get('/api/books', checkAuth, (req,res) => {
 })
 
 router.post('/api/books', (req,res) => {
-  let aut = req.body.authors
  new Books({
       title: req.body.title,
       description: req.body.description,
@@ -31,7 +30,6 @@ router.post('/api/books', (req,res) => {
 })
 
 router.delete("/api/books/:id", async (req,res) => {
-  console.log(req.params.id)
   await Books.deleteOne({_id: req.params.id});
   res.send("Success");
 })
@@ -101,7 +99,7 @@ router.post('/login', (req,res) => {
             expiresIn: "1h",
           }
         );
-        res.cookie('token', token, {httpOnly:true});
+        // res.cookie('token', token, {httpOnly:true});
         return res.status(200).json({message: "Auth successful", token, username: req.body.username})
       }
       res.status(401).json({

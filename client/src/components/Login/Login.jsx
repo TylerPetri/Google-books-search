@@ -37,7 +37,7 @@ function LoginForm(props){
 
     const fetchOptions = {
         method: 'POST',
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json" },
       }
       fetchOptions.body = JSON.stringify(data)
     
@@ -45,7 +45,7 @@ function LoginForm(props){
     console.log(token, username, message)
 
     if (message === 'Auth successful') {
-      localStorage.token = token
+      localStorage.token = 'Bearer=' + token
       localStorage.username = username
       pcUser = username
       dispatch({ type: 'USER_LOGIN', data: {name:username, token: token }})

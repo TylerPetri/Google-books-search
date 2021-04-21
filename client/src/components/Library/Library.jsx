@@ -1,32 +1,26 @@
 import { useState, useEffect } from 'react'
+import { Redirect } from 'react-router-dom'
 import { MdDelete } from 'react-icons/md'
 import Login from '../Login/Login'
 import noimg from '../../img/noimg.jpg'
 
+import { useStoreContext } from '../../utils/GlobalStore'
 import fetchJSON from '../../utils/API'
 
 import './Library.css'
 
-// import { Redirect } from 'react-router-dom'
-
-
 function Saved() {
 
+const [{log}] = useStoreContext()
 const [bookList, setBookList ] = useState([])
-
 
 async function loadBooks() {
     const data = await fetchJSON('/api/books');
-    // console.log(data.message)
-    // if(data.message === "Auth failed"){return <Redirect to="/login"/>}
-    // else {
-        setBookList(data) 
-    // }
-   
+    setBookList(data)
 }
 
 useEffect(function(){
-    loadBooks()
+    if(log) loadBooks()
 }, [])
 
 function deleteBook(idx){
@@ -41,14 +35,13 @@ function renderDesc(book){
 
     return (
         <>
+        {!log ? <Redirect to='/'/> : null}
         <Login/>
         <div className="listLibrary">
-                {/* <---list---> */}
-            
             { bookList.length > 0 ? bookList.map( (book,idx)=> {
                 return (
                     <div key={idx} className="card">
-                            <MdDelete className="saveBtn" onClick={()=>deleteBook(book.volumeInfo)}/>
+                            <MdDelete className="saveBtn" onClick={()=>deleteBook(book._id)}/>
                             <div className="saveBtnPopUp">Remove from library</div>
                             {book.image ? 
                             <img src={book.image} className="thumbnailImg" alt="thumbnail"/>

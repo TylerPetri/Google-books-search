@@ -7,7 +7,7 @@ import Login from '../Login/Login'
 
 function Search() {
 
-    const [{searchResults}, dispatch] = useStoreContext()
+    const [{searchResults}] = useStoreContext()
 
     function saveBook(res){
         fetchJSON('/api/books', 'post', res)
@@ -32,7 +32,7 @@ function Search() {
                                 {book.volumeInfo.imageLinks ? 
                                 <img src={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail || ''} className="thumbnailImg" alt="thumbnail"/>
                                 :
-                                <img className="nothumbnailImg" src={noimg} alt="no image available"/>
+                                <img className="nothumbnailImg" src={noimg} alt="not available"/>
                                 }
                                 
                             <div className="title">{book.volumeInfo.title}</div>
