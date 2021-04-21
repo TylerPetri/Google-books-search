@@ -3,6 +3,7 @@ import { GiBookshelf } from 'react-icons/gi'
 import './Search.css'
 import fetchJSON from '../../utils/API';
 import noimg from '../../img/noimg.jpg'
+import Login from '../Login/Login'
 
 function Search() {
 
@@ -18,13 +19,16 @@ function Search() {
     }
 
         return (
-            <>    
+            <> 
+            <Login/>
             <div className="listSearch">
                     {/* <---list---> */}
                 {searchResults.length > 0 ? searchResults.map( (book, idx) => {
                     return (
+                        
                         <div key={idx} className="card">
                                 <GiBookshelf className="saveBtn" onClick={()=>saveBook(book.volumeInfo)}/>
+                                <div className="saveBtnPopUp">Add to library</div>
                                 {book.volumeInfo.imageLinks ? 
                                 <img src={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail || ''} className="thumbnailImg" alt="thumbnail"/>
                                 :

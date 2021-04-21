@@ -5,33 +5,31 @@ import { useStoreContext } from "../../utils/GlobalStore"
 
 function LoginForm(props){
 
-  const [{name, token}, dispatch] = useStoreContext()
-  const [showModal, setShowModal] = useState(false)
+  const [{name, token, modal, log}, dispatch] = useStoreContext()
   const [authFail, setAuthFail] = useState(false)
-  const [log, setLog] = useState(false)
   const userRef = useRef()
   const passRef = useRef()
   let history = useHistory()
   let pcUser = ''
 
 
-  function toggleModal(){
-    setShowModal(true)
-  }
+  // function toggleModal(){
+  //   setShowModal(true)
+  // }
 
   function dismissModal (){
-    setShowModal(false)
+    dispatch({type:'HIDE_MODAL'})
   }
 
-  function logout(){
-    setLog(false)
-    dispatch({type:"USER_LOGOUT"})
-  }
+  // function logout(){
+  //   setLog(false)
+  //   dispatch({type:"USER_LOGOUT"})
+  // }
 
   useEffect(function(){
     if (localStorage.getItem("email") !== null) {
       pcUser = localStorage.getItem("email")
-      setLog(true)
+      dispatch({type: 'LOG_TRUE'})
       }
     if(pcUser !== ''){
       dispatch({ type: 'ALREADY_SIGNEDIN', data: {name:pcUser}})
@@ -62,8 +60,8 @@ function LoginForm(props){
       pcUser = email
       dispatch({ type: 'USER_LOGIN', data: {name:email, token: token }})
       history.push('/publicChat')
-      dismissModal()
-      setLog(true)
+      dispatch({type: "HIDE_MODAL"})
+      dispatch({type: 'LOG_TRUE'})
     } else if ( message === 'No such being!' || 'Wrong password') {
       passRef.current.value = ''
       setAuthFail(true)
@@ -72,7 +70,7 @@ function LoginForm(props){
 
     return (
         <>
-        {log ? <button type="button" className="signinBtn" onClick={logout}>
+        {/* {log ? <button type="button" className="signinBtn" onClick={logout}>
                     Sign out
           </button>
           :
@@ -81,10 +79,10 @@ function LoginForm(props){
                       Sign in
             </button> 
           </div>
-          }
+          } */}
           
 
-        <div className="modalSign" style={{display: showModal === true ? 'block' : 'none'}}>
+        <div className="modalSign" style={{display: modal === true ? 'block' : 'none'}}>
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">Log in</h5>

@@ -48,6 +48,40 @@
     margin: 10px;
     height: 20px;
     width: 20px;
+    position: relative;
+}
+
+.saveBtn:hover {
+    cursor: pointer;
+}
+
+.saveBtnPopUp {
+    visibility: hidden;
+    width: max-content;
+    background-color: rgb(175, 120, 69);
+    color: #fff;
+    text-align: center;
+    padding: 5px 8px;
+    font-size: .9rem;
+    height: max-content;
+    opacity: 0;
+    transition: 0.3s;
+    border-radius: 3px;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 10;
+    left: 0%;
+    margin: 4px 42px;
+}
+
+.saveBtn:hover ~ .saveBtnPopUp {
+    visibility: visible;
+    opacity: 0.85
+}
+
+.saveBtnPopUp {
+    cursor: default;
 }
 
 .thumbnailImg {
@@ -88,4 +122,5 @@
     text-align: center;
     align-items: center;
     min-height: max-content;
+    z-index:1;
 }

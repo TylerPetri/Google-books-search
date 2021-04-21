@@ -7,7 +7,9 @@ const initialData = {
   nav: false, 
   opa: false, 
   rightMarg: false,
-  searchResults: {}
+  searchResults: {},
+  modal: false,
+  log: false
 }
 
 const dataReducer = (state, action) => {
@@ -28,6 +30,14 @@ const dataReducer = (state, action) => {
       return { ...state, nav:true, opa:true, rightMarg:true}
     case "setSearchResults":
       return { ...state, ...action.data}
+    case "SHOW_MODAL":
+      return { ...state, modal:true}
+    case "HIDE_MODAL":
+      return { ...state, modal:false}
+    case "LOG_TRUE":
+      return { ...state, log: true}
+    case "LOG_FALSE":
+      return { ...state, log: false}
     default:
       console.log(`Invalid action type: ${action.type}`)
       return state

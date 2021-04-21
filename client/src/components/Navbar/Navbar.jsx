@@ -6,7 +6,7 @@ import { ImSearch } from 'react-icons/im'
 import Search from '../Search/Search'
 import Library from '../Library/Library'
 import SignUp from '../Signup/Signup'
-import Login from '../Login/Login'
+import Button from '../Login/Button'
 import { useStoreContext } from '../../utils/GlobalStore'
 
 import './Navbar.css'
@@ -235,7 +235,7 @@ function Navbar(props) {
           }
           ]
         }})
-    })
+    },[])
 
     async function performSearch(){
         const res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${inputRef.current.value}&orderBy=newest&langRestrict=en&maxResults=30`)
@@ -283,7 +283,7 @@ function Navbar(props) {
             </div>
             <div className="navItemsCont">
                 <Link to='/saved' className="navLink"><GiBookshelf/></Link><span className="libraryPopUp">My Library</span>
-                <Login toggleNav={closeNav}/>
+                <Button/>
             </div>
         </nav>
         <div className="wrapper">
