@@ -7,6 +7,7 @@ const initialData = {
   searchResults: {},
   modal: false,
   log: false,
+  dropDown: false
 }
 
 const dataReducer = (state, action) => {
@@ -31,6 +32,8 @@ const dataReducer = (state, action) => {
       return { ...state, log: true}
     case "LOG_FALSE":
       return { ...state, log: false}
+    case "toggleDropDown":
+      return { ...state, ...action.data}
     default:
       console.log(`Invalid action type: ${action.type}`)
       return state

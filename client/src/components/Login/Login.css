@@ -100,8 +100,6 @@ h6 {
 }
 
 .logdiv {
-    display: flex;
-    gap: 5px;
     margin-left: 10px;
 }
 
@@ -139,8 +137,8 @@ h6 {
 
 .signinBtn:hover {
     cursor: pointer;
-    background-color: purple;
-    color: rgb(224, 105, 253);
+    background-color: purple !important;
+    color: rgb(224, 105, 253) !important;
 }
 
 .signinBtn:focus {

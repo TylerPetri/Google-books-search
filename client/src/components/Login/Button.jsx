@@ -3,28 +3,30 @@ import './Login.css'
 
 function LoginButton() {
 
-    const [{log}, dispatch] = useStoreContext()
+    const [{log, username, dropDown}, dispatch] = useStoreContext()
 
     function toggleModal(){
         dispatch({type:'SHOW_MODAL'})
       }
-    
-    function logout(){
-        dispatch({type:"USER_LOGOUT"})
-      }
+
+    function toggleDropDown(){
+      dispatch({type: 'toggleDropDown', data: {dropDown: !dropDown}})
+    }
 
     return (
         <>
         {log ? 
+        
             <div className="logdiv">
-            <button type="button" className="signinBtn" onClick={logout}>
-                    Sign out
-            </button>
+              <button type="button" className="signinBtn" onClick={toggleDropDown} style={{backgroundColor: dropDown ? 'purple' : 'rgb(224, 105, 253)', color: dropDown ? 'rgb(224, 105, 253)' : 'purple'}}>
+                      {username}
+              </button>
             </div>
+            
             :
             <div className="logdiv">
             <button type="button" className="signinBtn" onClick={toggleModal}>
-                        Sign in
+                    Sign in
             </button> 
             </div>
         }

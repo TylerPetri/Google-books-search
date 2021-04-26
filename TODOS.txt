@@ -3,7 +3,7 @@ update library realtime when delete [x]
 more auth:
     username to saved books model [x]
     books load only username [x]
-clear signin inputs []
+clear signin inputs [x]
 "must be signed in for library" []
 save button lit up if save on load []
 

@@ -172,3 +172,51 @@
         display: none
     }
 }
+
+.signedDropdown {
+    position: absolute;
+    top: 0;
+    right: 0%;
+    background-color: #000;
+    color:rgb(175, 120, 69);
+    margin-right: 25px;
+    z-index: 99;
+    border-radius: 5px;
+}
+
+.dropDownUl {
+    list-style-type: none;
+    padding: 10px 0;
+    width: 160px;
+    z-index: 99;
+    margin: 0;
+}
+
+.dropDownUl li {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+    flex-wrap: nowrap;
+    padding-right: 10px;
+}
+
+.dropDownUl li:hover {
+    cursor: pointer;
+    background-color: rgb(0, 140, 255, 0.2);
+}
+
+.liSpan {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.logoutIcon {
+    margin-right: 25px;
+    height: 30px;
+    width: 20px;
+}
+
+.liSignout {
+    margin: 3px 0 0 -5px;
+}

@@ -4,6 +4,7 @@ import axios from "axios";
 import { GiBookshelf } from 'react-icons/gi'
 import { ImSearch } from 'react-icons/im'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
+import { RiLogoutBoxRLine } from 'react-icons/ri'
 import Search from '../Search/Search'
 import Library from '../Library/Library'
 import SignUp from '../Signup/Signup'
@@ -15,7 +16,7 @@ import './Navbar.css'
 
 function Navbar() {
 
-    const [{searchResults}, dispatch] = useStoreContext()
+    const [{dropDown}, dispatch] = useStoreContext()
     const [showSearch, setSetShowSearch] = useState(false)
     const inputRef = useRef()
 
@@ -252,6 +253,11 @@ function Navbar() {
         !showSearch ? setSetShowSearch(true) : setSetShowSearch(false)
     }
 
+    function logout(){
+        dispatch({type: 'toggleDropDown', data: {dropDown: !dropDown}})
+        dispatch({type:"USER_LOGOUT"})
+    }
+
     return (
         <>
         <nav className="navbar flex-nowrap">
@@ -302,6 +308,11 @@ function Navbar() {
             </div>
         </nav>
         <div className="wrapper">
+            <div className="signedDropdown" style={{display: dropDown ? 'block' : 'none'}}>
+                <ul className="dropDownUl">
+                    <li onClick={logout}><span className="liSpan"><RiLogoutBoxRLine className="logoutIcon"/><p className="liSignout">Sign out</p></span></li>
+                </ul>
+            </div>
             <Route exact path='/' component={Search}/>
             <Route exact path='/saved' component={Library}/>
             <Route exact path='/signup' component={SignUp}/>

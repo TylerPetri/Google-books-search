@@ -43,6 +43,9 @@ function LoginForm(){
     
     const {token, username, message} = await fetch('/login', fetchOptions).then(r=>r.json())
 
+    userRef.current.value = ''
+    passRef.current.value = ''
+
     if (message === 'Auth successful') {
       localStorage.tokenGoogleBooksTP = 'Bearer=' + token
       localStorage.usernameGoogleBooksTP = username
