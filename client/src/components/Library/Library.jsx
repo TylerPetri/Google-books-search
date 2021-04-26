@@ -11,7 +11,7 @@ import './Library.css'
 
 function Saved() {
 
-const [{log, redirect}, dispatch] = useStoreContext()
+const [{log, noEntry}, dispatch] = useStoreContext()
 const [bookList, setBookList] = useState([])
 
 function toggleModal(){
@@ -24,14 +24,13 @@ async function loadBooks() {
         localStorage.removeItem('usernameGoogleBooksTP')
         localStorage.removeItem('tokenGoogleBooksTP')
         dispatch({type: 'LOG_FALSE'})
-        toggleModal()
     } else {
         setBookList(data)
     }
 }
 
 useEffect(function(){
-    if(log) loadBooks()
+    loadBooks()
 }, [bookList, log])
 
 async function deleteBook(idx){
@@ -47,7 +46,7 @@ function renderDesc(book){
 
     return (
         <>
-        {redirect ? <Redirect to='/'/> : null}
+        {noEntry ? <Redirect to='/'/> : null}
         <Login/>
         <div className="listLibrary">
             { bookList.length > 0 ? bookList.map( (book,idx)=> {

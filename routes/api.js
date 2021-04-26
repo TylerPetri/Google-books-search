@@ -8,9 +8,6 @@ const router = require('express').Router();
 const  Books  = require('../models/books');
 const checkAuth = require('./auth')
 
-router.get('/auth', checkAuth, (req,res) => {
-  res.send('authok')
-})
 
 router.get('/api/books', checkAuth, (req,res) => {
     Books.find({username: req.headers.username})

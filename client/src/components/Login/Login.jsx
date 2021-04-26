@@ -53,6 +53,7 @@ function LoginForm(){
       dispatch({ type: 'USER_LOGIN', data: {username:username, token: token }})
       dispatch({type: "HIDE_MODAL"})
       dispatch({type: 'LOG_TRUE'})
+      dispatch({type: 'NO_REDIRECT'})
     } else if ( message === 'No such being!' || 'Wrong password') {
       passRef.current.value = ''
       setAuthFail(true)

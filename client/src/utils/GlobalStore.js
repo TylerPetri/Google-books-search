@@ -8,7 +8,7 @@ const initialData = {
   modal: false,
   log: false,
   dropDown: false,
-  redirect: false
+  noEntry: false
 }
 
 const dataReducer = (state, action) => {
@@ -18,11 +18,9 @@ const dataReducer = (state, action) => {
     case "USER_LOGIN":
       return { ...state, ...action.data }
     case "USER_LOGOUT":
-      // needed to force this reload (else it just refreshed with invalid content)
       localStorage.removeItem('usernameGoogleBooksTP')
       localStorage.removeItem('tokenGoogleBooksTP')
-      // window.location.href = '/'
-      return { ...state, name:"", token:"", log:false }
+      return { ...state, name:"", token:"", log:false, noEntry: true }
     case "setSearchResults":
       return { ...state, ...action.data}
     case "SHOW_MODAL":
@@ -36,9 +34,9 @@ const dataReducer = (state, action) => {
     case "toggleDropDown":
       return { ...state, ...action.data}
     case "REDIRECT":
-      return { ...state, redirect: true}
+      return { ...state, noEntry: true}
     case "NO_REDIRECT":
-      return { ...state, redirect: false}
+      return { ...state, noEntry: false}
     default:
       console.log(`Invalid action type: ${action.type}`)
       return state

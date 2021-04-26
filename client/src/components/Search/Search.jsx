@@ -20,6 +20,7 @@ function Search() {
             }
         }
         checkAuth()
+        dispatch({type:'NO_REDIRECT'})
     }, [log])
 
     function saveBook(res){
