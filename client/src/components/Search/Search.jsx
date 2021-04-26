@@ -10,16 +10,12 @@ function Search() {
     const [{searchResults, username, token}] = useStoreContext()
 
     function saveBook(res){
-        fetchJSON('/api/books', 'post', res)
+        fetchJSON('/api/books', 'post', {res, username})
     }
 
     function renderDesc(book){
             if(!book.volumeInfo.description) return "(No description)";
             else return book.volumeInfo.description.slice(0,250) + "..."
-    }
-
-    function test(){
-        console.log(username, token)
     }
 
         return (

@@ -22,6 +22,9 @@ const UserSchema = new Schema({
     },
     link: {
         type: String
+    },
+    username: {
+        type: String
     }
 })
 

@@ -19,11 +19,14 @@ router.get('/api/books', checkAuth, (req,res) => {
 })
 
 router.post('/api/books', (req,res) => {
+  console.log(req.body)
+  const book = req.body.res
  new Books({
-      title: req.body.title,
-      description: req.body.description,
-      image: req.body.imageLinks.thumbnail,
-      link: req.body.previewLink
+      title: book.title,
+      description: book.description,
+      image: book.imageLinks.thumbnail,
+      link: book.previewLink,
+      username: req.body.username
     }).save()
   
     res.send('success')

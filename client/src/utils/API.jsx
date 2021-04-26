@@ -3,6 +3,7 @@ function fetchJSON( url, method='get', data={} ){
         method,
         headers: {
             'Content-Type': 'application/json',
+            username: localStorage.getItem('usernameGoogleBooksTP'),
             token: localStorage.getItem('tokenGoogleBooksTP')
         }
     }
