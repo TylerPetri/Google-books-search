@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors())
 
 
 if(process.env.NODE_ENV==="production"){
@@ -18,6 +19,7 @@ if(process.env.NODE_ENV==="production"){
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/books", {
     useNewUrlParser: true,
     useCreateIndex: true,
+    useUnifiedTopology: true
 });
 const connection = mongoose.connection
 connection.once('open', () => {
