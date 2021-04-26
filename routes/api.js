@@ -3,9 +3,9 @@ require("dotenv").config();
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const { User } = require('../models/index.js')
 const router = require('express').Router();
 const  Books  = require('../models/books');
+const  User  = require('../models/user')
 const checkAuth = require('./auth')
 
 
@@ -73,11 +73,6 @@ router.post('/signup', (req,res) => {
                     }
                 })
             }
-        })
-        .catch(err => {
-          res.status(500).json({
-            error: err
-          })
         })
 })
 

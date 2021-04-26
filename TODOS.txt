@@ -9,3 +9,5 @@ save button lit up if save on load [x]
 
 sign in button changes to username [x]
 delete user []
+
+heroku server problem []
