@@ -3,7 +3,7 @@ import './Login.css'
 
 function LoginButton() {
 
-    const [{name, token, log, modal}, dispatch] = useStoreContext()
+    const [{log}, dispatch] = useStoreContext()
 
     function toggleModal(){
         dispatch({type:'SHOW_MODAL'})

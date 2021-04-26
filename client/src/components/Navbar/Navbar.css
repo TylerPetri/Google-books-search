@@ -1,3 +1,29 @@
+.mobileSearch {
+    width: 100%;
+    height: 41px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobileArrow {
+    color:rgb(175, 120, 69);
+    margin-right: 15px;
+}
+
+.searchContainerMobile {
+    height: 35px;
+    display: flex;
+    flex-wrap: nowrap;
+    max-width: 650px;
+}
+
+.nonMobileNav {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
 .devLink {
     text-decoration: none;
     display: flex;
@@ -74,6 +100,7 @@
     height: 100%;
     padding-top: 4px;
     margin-right: 5px; 
+    margin-left: 7px;
     position: relative;
 }
 
@@ -88,7 +115,9 @@
     width: max-content;
     display: flex;
     align-items: center;
-    flex-wrap: nowrap
+    flex-wrap: nowrap;
+    list-style-type: none;
+    margin-bottom: 0;
 }
 
 .navItemsCont .libraryPopUp {
@@ -120,4 +149,26 @@
 
 .libraryPopUp:hover {
     cursor: default;
+}
+
+.hiddenSearch {
+    display: none;
+    color: rgb(175, 120, 69);
+    margin-right: 12px;
+    margin-left: 5px;
+}
+
+@media (max-width: 650px){
+    .searchContainer {
+        display: none;
+    }
+    .hiddenSearch {
+        display: block;
+    }
+}
+
+@media (max-width: 450px){
+    .oogle{
+        display: none
+    }
 }

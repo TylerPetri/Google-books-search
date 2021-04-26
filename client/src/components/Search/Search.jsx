@@ -7,7 +7,7 @@ import Login from '../Login/Login'
 
 function Search() {
 
-    const [{searchResults}] = useStoreContext()
+    const [{searchResults, username, token}] = useStoreContext()
 
     function saveBook(res){
         fetchJSON('/api/books', 'post', res)
@@ -18,9 +18,14 @@ function Search() {
             else return book.volumeInfo.description.slice(0,250) + "..."
     }
 
+    function test(){
+        console.log(username, token)
+    }
+
         return (
             <> 
             <Login/>
+            {/* <button onClick={test}>test username</button> */}
             <div className="listSearch">
                     {/* <---list---> */}
                 {searchResults.length > 0 ? searchResults.map( (book, idx) => {

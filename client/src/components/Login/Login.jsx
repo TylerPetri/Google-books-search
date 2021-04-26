@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from 'react'
 import './Login.css'
 import { useStoreContext } from "../../utils/GlobalStore"
 
-function LoginForm(props){
+function LoginForm(){
 
-  const [{name, token, modal, log}, dispatch] = useStoreContext()
+  const [{modal}, dispatch] = useStoreContext()
   const [authFail, setAuthFail] = useState(false)
   const userRef = useRef()
   const passRef = useRef()
@@ -17,12 +17,12 @@ function LoginForm(props){
   }
 
   useEffect(function(){
-    if (localStorage.getItem("username") !== null) {
-      pcUser = localStorage.getItem("username")
+    if (localStorage.getItem("usernameGoogleBooksTP") !== null) {
+      pcUser = localStorage.getItem("usernameGoogleBooksTP")
       dispatch({type: 'LOG_TRUE'})
       }
     if(pcUser !== ''){
-      dispatch({ type: 'ALREADY_SIGNEDIN', data: {name:pcUser}})
+      dispatch({ type: 'ALREADY_SIGNEDIN', data: {username:pcUser}})
     }
   }, [])
 
@@ -45,10 +45,10 @@ function LoginForm(props){
     console.log(token, username, message)
 
     if (message === 'Auth successful') {
-      localStorage.token = 'Bearer=' + token
-      localStorage.username = username
+      localStorage.tokenGoogleBooksTP = 'Bearer=' + token
+      localStorage.usernameGoogleBooksTP = username
       pcUser = username
-      dispatch({ type: 'USER_LOGIN', data: {name:username, token: token }})
+      dispatch({ type: 'USER_LOGIN', data: {username:username, token: token }})
       dispatch({type: "HIDE_MODAL"})
       dispatch({type: 'LOG_TRUE'})
     } else if ( message === 'No such being!' || 'Wrong password') {

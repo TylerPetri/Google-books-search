@@ -2,11 +2,8 @@ import React, { createContext, useReducer, useContext } from "react"
 
 // any variables we depend on for UI/flow we must pre-set
 const initialData = {
-  name: "",  
+  username: "",  
   token: "", 
-  nav: false, 
-  opa: false, 
-  rightMarg: false,
   searchResults: {},
   modal: false,
   log: false,
@@ -17,17 +14,13 @@ const dataReducer = (state, action) => {
     case "ALREADY_SIGNEDIN":
       return { ...state, ...action.data}
     case "USER_LOGIN":
-      return { ...state, ...action.data, alert: action.message || '', authOk: true }
+      return { ...state, ...action.data }
     case "USER_LOGOUT":
       // needed to force this reload (else it just refreshed with invalid content)
-      localStorage.removeItem('username')
-      localStorage.removeItem('token')
+      localStorage.removeItem('usernameGoogleBooksTP')
+      localStorage.removeItem('tokenGoogleBooksTP')
       // window.location.href = '/'
       return { ...state, name:"", token:"", log:false }
-    case "NAV_CLOSE":
-      return { ...state, opa:false, nav:false, rightMarg:false }
-    case "NAV_OPEN":
-      return { ...state, nav:true, opa:true, rightMarg:true}
     case "setSearchResults":
       return { ...state, ...action.data}
     case "SHOW_MODAL":
