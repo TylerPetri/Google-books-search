@@ -19,6 +19,10 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/books", {
     useNewUrlParser: true,
     useCreateIndex: true,
 });
+const connection = mongoose.connection
+connection.once('open', () => {
+  console.log("mongodb db connection established")
+})
 
 app.use(require('./routes/api'))
 
