@@ -9,7 +9,7 @@ const  Books  = require('../models/books');
 const checkAuth = require('./auth')
 
 router.get('/api/books', checkAuth, (req,res) => {
-    Books.find({})
+    Books.find({username: req.headers.username})
     .then( booksDB => {
         res.json(booksDB);
       })
@@ -19,7 +19,6 @@ router.get('/api/books', checkAuth, (req,res) => {
 })
 
 router.post('/api/books', (req,res) => {
-  console.log(req.body)
   const book = req.body.res
  new Books({
       title: book.title,
