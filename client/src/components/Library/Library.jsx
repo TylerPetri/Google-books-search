@@ -11,9 +11,8 @@ import './Library.css'
 
 function Saved() {
 
-const [{log}, dispatch] = useStoreContext()
+const [{log, redirect}, dispatch] = useStoreContext()
 const [bookList, setBookList] = useState([])
-const [warning, setWarning] = useState(false)
 
 function toggleModal(){
     dispatch({type:'SHOW_MODAL'})
@@ -33,7 +32,7 @@ async function loadBooks() {
 
 useEffect(function(){
     if(log) loadBooks()
-}, [bookList])
+}, [bookList, log])
 
 async function deleteBook(idx){
     await fetchJSON(`/api/books/${idx}`, 'delete')
@@ -48,6 +47,7 @@ function renderDesc(book){
 
     return (
         <>
+        {redirect ? <Redirect to='/'/> : null}
         <Login/>
         <div className="listLibrary">
             { bookList.length > 0 ? bookList.map( (book,idx)=> {

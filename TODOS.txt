@@ -4,8 +4,8 @@ more auth:
     username to saved books model [x]
     books load only username [x]
 clear signin inputs [x]
-"must be signed in for library" []
+"must be signed in for library" [x]
 save button lit up if save on load []
 
-sign in button changes to username []
+sign in button changes to username [x]
 delete user []

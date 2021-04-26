@@ -8,11 +8,11 @@ import Login from '../Login/Login'
 
 function Search() {
 
-    const [{searchResults, username}, dispatch] = useStoreContext()
+    const [{searchResults, username, log}, dispatch] = useStoreContext()
 
     useEffect(()=> {
         async function checkAuth(){
-            const res = await fetchJSON('/auth')
+            const res = await fetchJSON('/api/books')
             if (res.message === "Auth failed") {
                 dispatch({type:'LOG_FALSE'})
                 localStorage.removeItem('usernameGoogleBooksTP')
@@ -20,7 +20,7 @@ function Search() {
             }
         }
         checkAuth()
-    }, [])
+    }, [log])
 
     function saveBook(res){
         fetchJSON('/api/books', 'post', {res, username})
