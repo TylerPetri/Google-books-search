@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useStoreContext } from '../../utils/GlobalStore'
 import { GiBookshelf } from 'react-icons/gi'
 import './Search.css'
@@ -7,7 +8,19 @@ import Login from '../Login/Login'
 
 function Search() {
 
-    const [{searchResults, username}] = useStoreContext()
+    const [{searchResults, username}, dispatch] = useStoreContext()
+
+    useEffect(()=> {
+        async function checkAuth(){
+            const res = await fetchJSON('/auth')
+            if (res.message === "Auth failed") {
+                dispatch({type:'LOG_FALSE'})
+                localStorage.removeItem('usernameGoogleBooksTP')
+                localStorage.removeItem('tokenGoogleBooksTP')
+            }
+        }
+        checkAuth()
+    }, [])
 
     function saveBook(res){
         fetchJSON('/api/books', 'post', {res, username})

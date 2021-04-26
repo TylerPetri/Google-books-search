@@ -11,12 +11,24 @@ import './Library.css'
 
 function Saved() {
 
-const [{log}] = useStoreContext()
+const [{log}, dispatch] = useStoreContext()
 const [bookList, setBookList] = useState([])
+const [warning, setWarning] = useState(false)
+
+function toggleModal(){
+    dispatch({type:'SHOW_MODAL'})
+}
 
 async function loadBooks() {
     const data = await fetchJSON('/api/books');
-    setBookList(data)
+    if(data.message === 'Auth failed') {
+        localStorage.removeItem('usernameGoogleBooksTP')
+        localStorage.removeItem('tokenGoogleBooksTP')
+        dispatch({type: 'LOG_FALSE'})
+        toggleModal()
+    } else {
+        setBookList(data)
+    }
 }
 
 useEffect(function(){
@@ -36,7 +48,6 @@ function renderDesc(book){
 
     return (
         <>
-        {!log ? <Redirect to='/'/> : null}
         <Login/>
         <div className="listLibrary">
             { bookList.length > 0 ? bookList.map( (book,idx)=> {
@@ -61,7 +72,12 @@ function renderDesc(book){
                 : 
                 <>
                 <br></br>
-                <h2 className="intro">No books in this library yet</h2>
+                {log ? 
+                    <h2 className="intro">No books in this library yet</h2>
+                :
+                    <h2 className="intro">Must be signed in to view library</h2>
+                }
+                
                 </>
                 } 
         </div>

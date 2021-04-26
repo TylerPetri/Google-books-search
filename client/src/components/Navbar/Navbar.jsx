@@ -22,52 +22,7 @@ function Navbar() {
 
     useEffect(()=>{
         dispatch({type:'setSearchResults', data: {searchResults: 
-            [{
-                "volumeInfo": {
-                    "title": "Harry Potter: Feasts & Festivities (Entertaining Gifts, Entertaining at Home)",
-                    "subtitle": "The Official Book of Magical Recipes, Crafts, and Celebrations Inspired by the Wizarding World",
-                    "authors": [
-                        "Jennifer Carroll"
-                    ],
-                    "publisher": "Insight Editions",
-                    "publishedDate": "2021-09-21",
-                    "description": "Plan the perfect Harry Potter–themed party with this official cookbook and entertaining guide, featuring a treasury of recipes, crafts, projects, and activities to help you throw magical celebrations inspired by the films. Every event is magical when it’s inspired by the whimsical Wizarding World of the Harry Potter films! Bursting with gorgeous photography and sprinkled with fun behind-the-scenes facts from the movies, Harry Potter: Feasts & Festivities offers step-by-step instructions on how to create and cater the perfect Potter-themed event, from a birthday party to a Halloween party to a wizarding wedding. Harry Potter: Feasts & Festivities is packed with delicious recipes, fun projects, and unique party ideas ranging from simple plans for beginner hosts to more elaborate arrangements for experienced planning wizards. The first part focuses on Feasts, with more than 50 recipes for celebratory food from tasty appetizers to decadent desserts to bubbly drinks inspired by characters, creatures, artifacts, and locations from the films. Cook up a set of Hogwarts House Wraps—there’s one for every house! Enjoy some Butterbeer Pudding or Anti-Dementor Hot Chocolate. Looking for something a little more filling? Try the Black Lake Fish & Chips or Hogwarts Zucchini Boats. Featuring stunning food photography, this section has everything you need to make your buffet table look as decadent as a feast in the Great Hall. Part two focuses on Festivities and includes complete blueprints for creating six wizarding-themed events from a colorful house-themed birthday party to a spooky Halloween party set in the Forbidden Forest. Each party includes a complete planning strategy, plus ideas, photos, and instructions for decorations, invitations, favors, activities, and more. Projects include crafts like a DIY Sorting Hat, decorations like the Golden Snitch Garland, and games like Potter Bingo and Quidditch Cornhole. Each project is easy to make using items you can find around the house, and many include free downloadable templates based on the original graphic art from the films. Create each party in full or mix and match elements to create your own unique event! Whether you’re planning a casual movie marathon or a sophisticated Yule Ball–inspired holiday soiree, this book includes everything you need to make your next party as magical as a trip to Hogwarts! — MORE THAN 50 RECIPES: Festive foods from appetizers to main dishes to drinks and desserts, including Common Room Pizzas, Triwizard Cakes, Bacon-Wrapped Asparagus Wands, and a gorgeous Patronus Charm Pull Cake—perfect for weddings! — INCLUDES 6 COMPLETE PARTIES: Full instructions for invitations, decor, activities, and more to create magical parties and events! — EXCLUSIVE PATTERNS AND PROJECTS: Downloadable templates for official designs based on the original graphics from the films, including a Hogwarts Letter Invitation and Daily Prophet–Wrapped DIY Wizarding Crackers. — INSPIRING IMAGES: Gorgeous full-color photography of food, projects, and tablescapes help ensure success! — OFFICIAL HARRY POTTER BOOK: The only official Harry Potter entertaining guide.",
-                    "industryIdentifiers": [
-                        {
-                            "type": "ISBN_10",
-                            "identifier": "168383724X"
-                        },
-                        {
-                            "type": "ISBN_13",
-                            "identifier": "9781683837244"
-                        }
-                    ],
-                    "readingModes": {
-                        "text": false,
-                        "image": false
-                    },
-                    "pageCount": 208,
-                    "printType": "BOOK",
-                    "categories": [
-                        "Performing Arts"
-                    ],
-                    "maturityRating": "NOT_MATURE",
-                    "allowAnonLogging": false,
-                    "contentVersion": "preview-1.0.0",
-                    "panelizationSummary": {
-                        "containsEpubBubbles": false,
-                        "containsImageBubbles": false
-                    },
-                    "imageLinks": {
-                        "smallThumbnail": "http://books.google.com/books/content?id=BW9XuwEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
-                        "thumbnail": "http://books.google.com/books/content?id=BW9XuwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
-                    },
-                    "language": "en",
-                    "previewLink": "http://books.google.ca/books?id=BW9XuwEACAAJ&dq=harry+potter&hl=&cd=2&source=gbs_api",
-                    "infoLink": "http://books.google.ca/books?id=BW9XuwEACAAJ&dq=harry+potter&hl=&source=gbs_api",
-                    "canonicalVolumeLink": "https://books.google.com/books/about/Harry_Potter_Feasts_Festivities_Entertai.html?hl=&id=BW9XuwEACAAJ"
-                }
-            },
+            [
             {
               "volumeInfo": {
                   "title": "Ulysses",
@@ -260,7 +215,7 @@ function Navbar() {
 
     return (
         <>
-        <nav className="navbar flex-nowrap">
+        <nav className="navbar flex-nowrap navClass">
             <div className="mobileSearch" style={{display: showSearch ? 'flex' : 'none'}}>
                 <HiOutlineArrowLeft onClick={showSearchBar} className="mobileArrow"/>
                 <div className="searchContainerMobile" style={{display: showSearch ? 'flex' : 'none'}}>
