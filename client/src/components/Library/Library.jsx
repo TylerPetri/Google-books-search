@@ -12,7 +12,7 @@ import './Library.css'
 function Saved() {
 
 const [{log}] = useStoreContext()
-const [bookList, setBookList ] = useState([])
+const [bookList, setBookList] = useState([])
 
 async function loadBooks() {
     const data = await fetchJSON('/api/books');
@@ -21,10 +21,11 @@ async function loadBooks() {
 
 useEffect(function(){
     if(log) loadBooks()
-}, [])
+}, [bookList])
 
-function deleteBook(idx){
-    fetchJSON(`/api/books/${idx}`, 'delete')
+async function deleteBook(idx){
+    await fetchJSON(`/api/books/${idx}`, 'delete')
+    loadBooks()
 }
 
 function renderDesc(book){

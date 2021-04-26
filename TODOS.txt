@@ -1,9 +1,9 @@
 mobile search [x]
-save button lit up if save on load []
-update library realtime when delete []
+update library realtime when delete [x]
 more auth, including username personal libraries []
 clear signin inputs []
 "must be signed in for library" []
+save button lit up if save on load []
 
 sign in button changes to username []
 delete user []
