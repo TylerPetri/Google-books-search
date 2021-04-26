@@ -5,7 +5,7 @@ more auth:
     books load only username [x]
 clear signin inputs [x]
 "must be signed in for library" [x]
-save button lit up if save on load []
+save button lit up if save on load [x]
 
 sign in button changes to username [x]
 delete user []

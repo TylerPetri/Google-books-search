@@ -14,10 +14,6 @@ function Saved() {
 const [{log, noEntry}, dispatch] = useStoreContext()
 const [bookList, setBookList] = useState([])
 
-function toggleModal(){
-    dispatch({type:'SHOW_MODAL'})
-}
-
 async function loadBooks() {
     const data = await fetchJSON('/api/books');
     if(data.message === 'Auth failed') {

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useStoreContext } from '../../utils/GlobalStore'
 import { GiBookshelf } from 'react-icons/gi'
 import './Search.css'
@@ -9,29 +9,36 @@ import Login from '../Login/Login'
 function Search() {
 
     const [{searchResults, username, log}, dispatch] = useStoreContext()
+    const [saved, setBooks] = useState([])
+    const savedList = saved.map(a=>a.title)
+
+
+    async function checkAuth(){
+        const res = await fetchJSON('/api/books')
+        if (res.message === "Auth failed") {
+            dispatch({type:'LOG_FALSE'})
+            localStorage.removeItem('usernameGoogleBooksTP')
+            localStorage.removeItem('tokenGoogleBooksTP')
+        } else {
+            setBooks(res)
+        }
+    }
 
     useEffect(()=> {
-        async function checkAuth(){
-            const res = await fetchJSON('/api/books')
-            if (res.message === "Auth failed") {
-                dispatch({type:'LOG_FALSE'})
-                localStorage.removeItem('usernameGoogleBooksTP')
-                localStorage.removeItem('tokenGoogleBooksTP')
-            }
-        }
         checkAuth()
         dispatch({type:'NO_REDIRECT'})
-    }, [log])
+    }, [log, saved])
 
-    function saveBook(res){
-        fetchJSON('/api/books', 'post', {res, username})
+    async function saveBook(res){
+        await fetchJSON('/api/books', 'post', {res, username})
+        checkAuth()
     }
 
     function renderDesc(book){
             if(!book.volumeInfo.description) return "(No description)";
             else return book.volumeInfo.description.slice(0,250) + "..."
     }
-
+    
         return (
             <> 
             <Login/>
@@ -41,8 +48,8 @@ function Search() {
                     return (
                         
                         <div key={idx} className="card">
-                                <GiBookshelf className="saveBtn" onClick={()=>saveBook(book.volumeInfo)}/>
-                                <div className="saveBtnPopUp">Add to library</div>
+                                <GiBookshelf className="saveBtn" onClick={()=>saveBook(book.volumeInfo)}  style={{color: savedList.includes(book.volumeInfo.title) ? 'rgb(175, 120, 69)' : 'black'}}/>
+                                {savedList.includes(book.volumeInfo.title) ? <div className="saveBtnPopUp">Already in library</div> : <div className="saveBtnPopUp">Add to library</div>}
                                 {book.volumeInfo.imageLinks ? 
                                 <img src={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail || ''} className="thumbnailImg" alt="thumbnail"/>
                                 :
