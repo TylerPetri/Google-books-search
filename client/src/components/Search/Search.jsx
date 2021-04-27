@@ -20,7 +20,12 @@ function Search() {
             localStorage.removeItem('usernameGoogleBooksTP')
             localStorage.removeItem('tokenGoogleBooksTP')
         } else {
-            setBooks(res)
+            if(res!==saved) {
+                setBooks(res)
+            } else {
+                return console.log('cleaned')
+            }
+            
         }
     }
 
