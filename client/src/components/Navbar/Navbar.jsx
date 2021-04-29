@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, useHistory } from 'react-router-dom';
 import axios from "axios";
 import { GiBookshelf } from 'react-icons/gi'
 import { ImSearch } from 'react-icons/im'
@@ -19,6 +19,7 @@ function Navbar() {
     const [{dropDown}, dispatch] = useStoreContext()
     const [showSearch, setSetShowSearch] = useState(false)
     const inputRef = useRef()
+    let history = useHistory()
 
     useEffect(()=>{
         dispatch({type:'setSearchResults', data: {searchResults: 
@@ -198,6 +199,8 @@ function Navbar() {
     async function performSearch(){
         const res = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${inputRef.current.value}&orderBy=newest&langRestrict=en&maxResults=30`)
         dispatch({type:'setSearchResults', data: {searchResults: res.data.items}})
+        inputRef.current.value = ''
+        history.push('/')
     }
 
     function handleEnterKey(e) {
