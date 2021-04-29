@@ -21,7 +21,7 @@ function Search() {
             localStorage.removeItem('usernameGoogleBooksTP')
             localStorage.removeItem('tokenGoogleBooksTP')
         } else if (cleanup) {
-            console.log('break');
+            return
         } else {
             setBooks(res)
             setStop(true)

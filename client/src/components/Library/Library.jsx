@@ -12,6 +12,7 @@ import './Library.css'
 function Saved() {
 
 const [{log, noEntry}, dispatch] = useStoreContext()
+const [cleanup, setStop] = useState(false)
 const [bookList, setBookList] = useState([])
 
 async function loadBooks() {
@@ -20,8 +21,12 @@ async function loadBooks() {
         localStorage.removeItem('usernameGoogleBooksTP')
         localStorage.removeItem('tokenGoogleBooksTP')
         dispatch({type: 'LOG_FALSE'})
-    } else {
+    } else if (cleanup) {
+        return
+    }
+    else {
         setBookList(data)
+        setStop(true)
     }
 }
 
@@ -30,6 +35,7 @@ useEffect(function(){
 }, [bookList, log])
 
 async function deleteBook(idx){
+    setStop(false)
     await fetchJSON(`/api/books/${idx}`, 'delete')
     loadBooks()
 }
