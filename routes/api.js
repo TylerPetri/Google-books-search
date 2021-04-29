@@ -45,6 +45,8 @@ router.post('/signup', (req,res) => {
                 return res.status(409).json({
                     message: 'User exists'
                 })
+            } else if (req.body.password.length < 1) {
+              res.send({message: "Password required"})
             } else {
             bcrypt.hash(req.body.password, 10, (err, hash) => {
                 if (err) {

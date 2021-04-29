@@ -7,6 +7,7 @@ import './Signup.css'
 function SignUpPage(){
 
     const [required, setRequired] = useState(false)
+    const [exists, setExists] = useState(false)
     const userRef = useRef()
     const passRef = useRef()
     let history = useHistory()
@@ -26,10 +27,12 @@ function SignUpPage(){
           fetchOptions.body = JSON.stringify(data)
         
         const res = await fetch('/signup', fetchOptions).then(r=>r.json())
-
-        if(res.error) {
+        if(res.error || res.message === "Password required") {
             setRequired(true)
             uprequire()
+        } else if (res.message === "User exists") {
+            setExists(true)
+            taken()
         } else {
             history.push('/')
         }
@@ -39,12 +42,17 @@ function SignUpPage(){
         setTimeout(()=>setRequired(false), 3000)
     }
 
+    function taken(){
+        setTimeout(()=>setExists(false), 3000)
+    }
+
     return(
         <>
         <Login/>
         <div className="signUpContainer">
             <form className="signUpForm">
                 <h5 className="upr" style={{display: required ? 'block' : 'none'}}>Username & password required</h5>
+                <h5 className="upr" style={{display: exists ? 'block' : 'none'}}>Username already taken</h5>
                 <div>
                     <label htmlFor="username" className="form-label">
                         <div className="labels">
