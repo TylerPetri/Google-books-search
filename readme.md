@@ -1,4 +1,4 @@
-## Google books search
+## Google books search - React app
 
 Ever wanted to search for a book through google with a youtube inspired navbar? Tadda! Googlebooksapi9000: signin, save books for later, delete some, or click the "view more details" link and be redirected to an understandibly less stylish/less cpu consuming website to do what you desire.
 
