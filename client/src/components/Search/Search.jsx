@@ -16,13 +16,12 @@ function Search() {
 
     async function checkAuth(){
         const res = await fetchJSON('/api/books')
-        console.log('running')
         if (res.message === "Auth failed") {
             dispatch({type:'LOG_FALSE'})
             localStorage.removeItem('usernameGoogleBooksTP')
             localStorage.removeItem('tokenGoogleBooksTP')
         } else if (cleanup) {
-            console.log('break')
+            return
         } else {
             setBooks(res)
             setStop(true)
