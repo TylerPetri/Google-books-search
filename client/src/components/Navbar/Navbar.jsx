@@ -213,65 +213,71 @@ function Navbar() {
         dispatch({type:"USER_LOGOUT"})
     }
 
+    function nodropdown(){
+        dispatch({type:"CLOSE_DROPDOWN"})
+    }
+
     return (
         <>
-        <nav className="navbar flex-nowrap navClass">
-            <div className="mobileSearch" style={{display: showSearch ? 'flex' : 'none'}}>
-                <HiOutlineArrowLeft onClick={showSearchBar} className="mobileArrow"/>
-                <div className="searchContainerMobile" style={{display: showSearch ? 'flex' : 'none'}}>
-                    <input 
-                        type="text" 
-                        className="form-control mx-0 pb-2 searchInput" 
-                        placeholder="Search"
-                        ref={inputRef} onKeyDown={e=>handleEnterKey(e)}
-                    ></input>
-                    <Link to='/'>
-                        <button type="submit" className="searchBtn" onClick={performSearch}>
-                            <ImSearch className="btnIconSearch" />
-                        </button>
-                    </Link>
-                </div>
-            </div>
-            <div className="nonMobileNav" style={{display: !showSearch ? 'flex' : 'none'}}>
-                <Link to="/" className="devLink">
-                <h3 className="dev1">
-                    <span>G</span>
-                    <span className="oogle">oogle</span>
-                </h3>
-                <h3 className="dev2">
-                    Books
-                </h3>
-                </Link>
-                <div className="searchContainer">
-                    <input 
-                        type="text" 
-                        className="form-control mx-0 pb-2 searchInput" 
-                        placeholder="Search"
-                        ref={inputRef} onKeyDown={e=>handleEnterKey(e)}
-                    ></input>
-                    <Link to='/'>
-                        <button type="submit" className="searchBtn" onClick={performSearch}>
-                            <ImSearch className="btnIconSearch" />
-                        </button>
-                    </Link>
-                </div>
-                <div className="navItemsCont">
-                    <ImSearch className="hiddenSearch" onClick={showSearchBar}></ImSearch>
-                    <Link to='/saved' className="navLink"><GiBookshelf/></Link><span className="libraryPopUp">My Library</span>
-                    <Button/>
-                </div>
-            </div>
-        </nav>
-        <div className="wrapper">
+        <div className="invisiblebg" style={{display: dropDown ? 'block' : 'none'}} onClick={nodropdown}>
             <div className="signedDropdown" style={{display: dropDown ? 'block' : 'none'}}>
                 <ul className="dropDownUl">
                     <li onClick={logout}><span className="liSpan"><RiLogoutBoxRLine className="logoutIcon"/><p className="liSignout">Sign out</p></span></li>
                 </ul>
             </div>
-            <Route exact path='/' component={Search}/>
-            <Route exact path='/saved' component={Library}/>
-            <Route exact path='/signup' component={SignUp}/>
         </div>
+            <nav className="navbar flex-nowrap navClass">
+                <div className="mobileSearch" style={{display: showSearch ? 'flex' : 'none'}}>
+                    <HiOutlineArrowLeft onClick={showSearchBar} className="mobileArrow"/>
+                    <div className="searchContainerMobile" style={{display: showSearch ? 'flex' : 'none'}}>
+                        <input 
+                            type="text" 
+                            className="form-control mx-0 pb-2 searchInput" 
+                            placeholder="Search"
+                            ref={inputRef} onKeyDown={e=>handleEnterKey(e)}
+                        ></input>
+                        <Link to='/'>
+                            <button type="submit" className="searchBtn" onClick={performSearch}>
+                                <ImSearch className="btnIconSearch" />
+                            </button>
+                        </Link>
+                    </div>
+                </div>
+                <div className="nonMobileNav" style={{display: !showSearch ? 'flex' : 'none'}}>
+                    <Link to="/" className="devLink">
+                    <h3 className="dev1">
+                        <span>G</span>
+                        <span className="oogle">oogle</span>
+                    </h3>
+                    <h3 className="dev2">
+                        Books
+                    </h3>
+                    </Link>
+                    <div className="searchContainer">
+                        <input 
+                            type="text" 
+                            className="form-control mx-0 pb-2 searchInput" 
+                            placeholder="Search"
+                            ref={inputRef} onKeyDown={e=>handleEnterKey(e)}
+                        ></input>
+                        <Link to='/'>
+                            <button type="submit" className="searchBtn" onClick={performSearch}>
+                                <ImSearch className="btnIconSearch" />
+                            </button>
+                        </Link>
+                    </div>
+                    <div className="navItemsCont">
+                        <ImSearch className="hiddenSearch" onClick={showSearchBar}></ImSearch>
+                        <Link to='/saved' className="navLink"><GiBookshelf/></Link><span className="libraryPopUp">My Library</span>
+                        <Button/>
+                    </div>
+                </div>
+            </nav>
+            <div className="wrapper">
+                <Route exact path='/' component={Search}/>
+                <Route exact path='/saved' component={Library}/>
+                <Route exact path='/signup' component={SignUp}/>
+            </div>
         </>
     )
 }

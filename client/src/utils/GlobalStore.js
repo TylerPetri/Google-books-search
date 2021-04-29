@@ -33,6 +33,8 @@ const dataReducer = (state, action) => {
       return { ...state, log: false}
     case "toggleDropDown":
       return { ...state, ...action.data}
+    case "CLOSE_DROPDOWN":
+      return { ...state, dropDown: false}
     case "REDIRECT":
       return { ...state, noEntry: true}
     case "NO_REDIRECT":

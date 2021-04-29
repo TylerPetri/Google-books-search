@@ -43,11 +43,15 @@ function Search() {
             if(!book.volumeInfo.description) return "(No description)";
             else return book.volumeInfo.description.slice(0,250) + "..."
     }
+
+    function nodropdown(){
+        dispatch({type:"CLOSE_DROPDOWN"})
+    }
     
         return (
             <> 
             <Login/>
-            <div className="listSearch">
+            <div className="listSearch" onClick={nodropdown}>
                     {/* <---list---> */}
                 {searchResults.length > 0 ? searchResults.map( (book, idx) => {
                     return (

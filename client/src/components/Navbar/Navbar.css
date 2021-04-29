@@ -1,3 +1,12 @@
+.invisiblebg {
+    z-index: 15;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
 .navClass {
  position: fixed;
  width: 100%;
@@ -227,4 +236,5 @@
 
 .liSignout {
     margin: 3px 0 0 -5px;
+    z-index: 20;
 }
