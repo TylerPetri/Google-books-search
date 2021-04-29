@@ -34,10 +34,10 @@ useEffect(function(){
     loadBooks()
 }, [bookList, log])
 
-async function deleteBook(idx){
+function deleteBook(idx){
+    fetchJSON(`/api/books/${idx}`, 'delete')
     setStop(false)
-    await fetchJSON(`/api/books/${idx}`, 'delete')
-    loadBooks()
+    setBookList([...bookList, 'reload'])
 }
 
 function renderDesc(book){
@@ -51,7 +51,7 @@ function renderDesc(book){
         {noEntry ? <Redirect to='/'/> : null}
         <Login/>
         <div className="listLibrary">
-            { bookList.length > 0 ? bookList.map( (book,idx)=> {
+            { bookList.length > 0 ? bookList.filter(a=>a!=='reload').map( (book,idx)=> {
                 return (
                     <div key={idx} className="card">
                             <MdDelete className="saveBtn" onClick={()=>deleteBook(book._id)}/>

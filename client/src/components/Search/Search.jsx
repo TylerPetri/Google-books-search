@@ -16,12 +16,13 @@ function Search() {
 
     async function checkAuth(){
         const res = await fetchJSON('/api/books')
+        console.log('running')
         if (res.message === "Auth failed") {
             dispatch({type:'LOG_FALSE'})
             localStorage.removeItem('usernameGoogleBooksTP')
             localStorage.removeItem('tokenGoogleBooksTP')
         } else if (cleanup) {
-            return
+            console.log('break')
         } else {
             setBooks(res)
             setStop(true)
@@ -33,10 +34,10 @@ function Search() {
         dispatch({type:'NO_REDIRECT'})
     }, [log, saved])
 
-    async function saveBook(res){
-        await fetchJSON('/api/books', 'post', {res, username})
+    function saveBook(res){
+        fetchJSON('/api/books', 'post', {res, username})
         setStop(false)
-        checkAuth()
+        setBooks([...saved, 'reload'])
     }
 
     function renderDesc(book){
