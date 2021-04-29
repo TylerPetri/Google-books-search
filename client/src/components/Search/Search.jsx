@@ -10,6 +10,7 @@ function Search() {
 
     const [{searchResults, username, log}, dispatch] = useStoreContext()
     const [saved, setBooks] = useState([])
+    const [cleanup, setStop] = useState(false)
     const savedList = saved.map(a=>a.title)
 
 
@@ -19,13 +20,11 @@ function Search() {
             dispatch({type:'LOG_FALSE'})
             localStorage.removeItem('usernameGoogleBooksTP')
             localStorage.removeItem('tokenGoogleBooksTP')
+        } else if (cleanup) {
+            console.log('break');
         } else {
-            if(res!==saved) {
-                setBooks(res)
-            } else {
-                return console.log('cleaned')
-            }
-            
+            setBooks(res)
+            setStop(true)
         }
     }
 
@@ -36,6 +35,7 @@ function Search() {
 
     async function saveBook(res){
         await fetchJSON('/api/books', 'post', {res, username})
+        setStop(false)
         checkAuth()
     }
 
