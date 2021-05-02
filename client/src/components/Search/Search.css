@@ -79,13 +79,15 @@
     margin: 4px 42px;
 }
 
-.saveBtn:hover ~ .saveBtnPopUp {
-    visibility: visible;
-    opacity: 0.85
-}
-
 .saveBtnPopUp {
     cursor: default;
+}
+
+@media (min-width: 651px){
+    .saveBtn:hover ~ .saveBtnPopUp {
+        visibility: visible;
+        opacity: 0.85
+    }
 }
 
 .thumbnailImg {
