@@ -27,11 +27,15 @@
     margin-right: 15px;
 }
 
+.mobileArrow:hover {
+    cursor: pointer;
+}
+
 .searchContainerMobile {
     height: 35px;
     display: flex;
     flex-wrap: nowrap;
-    max-width: 650px;
+    width: 95%;
 }
 
 .nonMobileNav {
@@ -172,6 +176,10 @@
     color: rgb(175, 120, 69);
     margin-right: 12px;
     margin-left: 5px;
+}
+
+.hiddenSearch:hover {
+    cursor: pointer;
 }
 
 @media (max-width: 650px){
