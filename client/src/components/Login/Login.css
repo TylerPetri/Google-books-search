@@ -28,23 +28,8 @@ h6 {
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
-  }
-
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0} 
-    to {top:0; opacity:1}
-  }
-  
-  @keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-  }
-
-.modalHeader {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
 }
+
 
 .signupA {
     color: rgb(17, 86, 143);
@@ -61,6 +46,31 @@ h6 {
     text-decoration: none;
 }
 
+@media(max-width: 550px){
+    .modal-content{
+        width: 300px;
+    }
+    .signupA {
+        padding: 0;
+        font-size: .8rem;
+    }
+}
+
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
 
 .modalSign {
     display: flex;
