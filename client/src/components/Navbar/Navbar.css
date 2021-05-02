@@ -162,9 +162,11 @@
     margin-top: 5px
 }
 
-.navLink:hover ~ .libraryPopUp {
-    visibility: visible;
-    opacity: 0.85
+@media(min-width: 651px){
+    .navLink:hover ~ .libraryPopUp {
+        visibility: visible;
+        opacity: 0.85
+    }
 }
 
 .libraryPopUp:hover {
