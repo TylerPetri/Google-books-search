@@ -16,6 +16,10 @@ There were no automated tests during the process of this application.
 
 MongoDB, Mongoose, Express, React, React Hooks, NodeJS, API, CSS, Bootstrap, Bcrypt, JSON web token, react-icons
 
+## License
+
+This project is licensed under the MIT License
+
 ## Contributing
 
 There are many ways in which you can participate in the project, for example: 
