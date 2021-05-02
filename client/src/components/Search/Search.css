@@ -21,6 +21,12 @@
     grid-template-rows: max-content max-content max-content 30px;
 }
 
+@media (max-width: 440px) {
+    .card {
+        width: 300px;
+    }
+}
+
 .title {    
     grid-column-start: 2;
     grid-column-end: 3;
