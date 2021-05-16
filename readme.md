@@ -8,6 +8,8 @@ https://googlebooksapi9000.herokuapp.com/
 
 ![Homepage](client/src/img/Homepage.PNG)
 
+![MongoDb](client/src/img/Mongodb.PNG)
+
 ## Running the tests
 
 There were no automated tests during the process of this application. 
