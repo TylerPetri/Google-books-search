@@ -54,12 +54,18 @@ router.post('/signup', (req,res) => {
                         error: err,
                     })
                 } else {
-                    const user = new User({
+                  bcrypt.hash(req.body.answer, 10, (err, ahash) => {
+                    if (err) {
+                      return res.status(500).json({
+                        error: err,
+                      })
+                    } else {
+                      const user = new User({
                         _id: mongoose.Types.ObjectId(),
                         username: req.body.username,
                         password: hash,
                         question: req.body.question,
-                        answer: req.body.answer,
+                        answer: ahash,
                     })
                     user
                         .save()
@@ -74,7 +80,9 @@ router.post('/signup', (req,res) => {
                             })
                         })
                     }
-                })
+                  })
+                }
+            })
             }
         })
 })
@@ -119,6 +127,75 @@ router.post('/login', (req,res) => {
       error: err,
     });
   });
+})
+
+router.post('/questionReq', (req, res) => {
+  User.find({ username: req.body.username })
+  .exec()
+  .then(user => {
+    if (user.length < 1) {
+      res.status(401).json({
+        message: 'No such being!'
+      })
+    }
+    return res.status(200).json({
+      message: user[0].question
+    })
+  })
+  .catch(err=> {
+    console.log(err)
+    res.status(500).json({
+      error: err
+    })
+  })
+})
+
+router.post('/answerAuth', (req, res) => {
+  User.find({ username: req.body.username })
+  .exec()
+  .then(user => {
+    if (user.length < 1) {
+      return res.status(401).json({
+        message: 'No such being!'
+      })
+    } else if (req.body.answer.length < 1) {
+      return res.status(401).json({
+        message: 'Answer required!'
+      })
+    } else {
+      bcrypt.compare(req.body.answer, user[0].answer, (err, result) => {
+        if (err) {
+          return res.status(401).json({
+            message: 'Wrong answer'
+          })
+        } else if (result) {
+          const token = jwt.sign(
+            {
+              username: user[0].username,
+              userId: user[0]._id,
+            },
+            process.env.JWT_KEY,
+            {
+              expiresIn: "1h",
+            }
+          );
+          return res.status(200).json({
+            message: 'Auth successful'
+          })
+        } else {
+          res.status(401).json({
+            message: 'Auth failed'
+          })
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+        res.status(500).json({
+          error: err
+        })
+      })
+    }
+  })
 })
 
 

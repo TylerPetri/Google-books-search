@@ -9,13 +9,76 @@ function ForgotPasswordAuthPage(){
 
     const [required, setRequired] = useState(false)
     const [incorrect, setIncorrect] = useState(false)
+    const [auth, setAuth] = useState(false)
+    const [show, setShow] = useState(false)
+    const [username, setUsername] = useState("")
+    const [question, setQuestion] = useState("")
+    const userRef = useRef()
     const questionRef = useRef()
     const answerRef = useRef()
+    let history = useHistory()
 
-    async function requestAuth(){
-        uprequire()
-        upincorrect()
-        console.log('test')
+    async function requestQuestion(e){
+        e.preventDefault()
+
+        const data = {
+            username: userRef.current.value,
+        }
+
+        const fetchOptions = {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" }
+          }
+          fetchOptions.body = JSON.stringify(data)
+        
+        const res = await fetch('/questionReq', fetchOptions).then(r=>r.json())
+        console.log(res)
+        if (res.message === 'No such being!') {
+            userRef.current.value = ''
+            setAuth(true)
+            upAuth()
+        } else {
+            setQuestion(res.message + "?")
+            setUsername(userRef.current.value)
+            setShow(true)
+        }
+    }
+
+    async function requestAuth(e){
+        e.preventDefault()
+
+        const data = {
+            username: username,
+            question: question,
+            answer: answerRef.current.value
+        }
+
+        const fetchOptions = {
+            method: 'POST',
+            headers: {'Content-type': 'application/json'}
+        }
+        fetchOptions.body = JSON.stringify(data)
+
+        const res = await fetch('/answerAuth', fetchOptions).then(r=>r.json())
+        console.log(res)
+        if (res.message === 'No such being!') {
+            setAuth(true)
+            upAuth()
+        } else if (res.message === 'Wrong answer' || res.message === 'Auth failed') {
+            setIncorrect(true)
+            answerRef.current.value = ''
+            upincorrect()
+        } else if (res.message === 'Answer required!') {
+            setRequired(true)
+            answerRef.current.value = ''
+            uprequire()
+        } else {
+            history.push('/newpassword')
+        }
+    }
+
+    function upAuth(){
+        setTimeout(()=>setAuth(false), 3000)
     }
 
     function uprequire(){
@@ -31,18 +94,29 @@ function ForgotPasswordAuthPage(){
         <Login/>
         <div className="signUpContainer">
             <form className="signUpForm">
+                <h5 className="upr" style={{display: auth ? 'block' : 'none'}}>No such being!</h5>
                 <h5 className="upr" style={{display: required ? 'block' : 'none'}}>Answer required</h5>
-                <h5 className="upr" style={{display: incorrect ? 'block' : 'none'}}>Incorrect</h5>
-                <div>
+                <h5 className="upr" style={{display: incorrect ? 'block' : 'none'}}>Incorrect answer</h5>
+                <div style={{display: !show ? 'block' : 'none'}}>
+                    <label htmlFor="enteruse" className="form-label">
+                        <div className="labels">
+                            <h3 className="dev1">User</h3>
+                            <h3 className="dev2">name</h3>
+                        </div>
+                    </label>
+                    <input className="form-control logInput" ref={userRef}/>
+                    <button className="signupBTN" onClick={requestQuestion}>request</button>
+                </div>
+                <div style={{display: show ? 'block' : 'none'}}>
                     <label className="form-label">
                         <div className="labels">
                             <h3 className="dev1">Ques</h3>
                             <h3 className="dev2">tion</h3>
                         </div>
                     </label>
-                    <input type="text" className="form-control-plaintext questionArea" ref={questionRef} value="Question template" readOnly/>
+                    <input type="text" className="form-control-plaintext questionArea" ref={questionRef} value={question} readOnly/>
                 </div>
-                <div>
+                <div style={{display: show ? 'block' : 'none'}}>
                     <label htmlFor="password" className="form-label">
                         <div className="labels">
                             <h3 className="dev1">Ans</h3>
@@ -50,8 +124,8 @@ function ForgotPasswordAuthPage(){
                         </div>
                     </label>
                     <input type="password" className="form-control signupInput" ref={answerRef}/>
-                </div>
                     <button className="signupBTN" onClick={requestAuth}>Submit</button>
+                </div>
             </form>
         </div>
         </>
