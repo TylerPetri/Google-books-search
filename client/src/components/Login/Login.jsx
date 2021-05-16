@@ -70,7 +70,7 @@ function LoginForm(){
         <div className="modalSign" style={{display: modal === true ? 'block' : 'none'}}>
             <div className="modal-content">
               <div className="modalHeader">
-                <h5 className="modal-title modalTitle" id="exampleModalLabel"></h5>
+                <div className="modal-title modalTitle" id="exampleModalLabel"></div>
                 <h6 className="authFail" style={{display: authFail ? 'block' : 'none'}}>Incorrect username or password</h6>
                 <button className="btn closeModal" onClick={dismissModal}>&times;</button>
               </div>
@@ -97,8 +97,11 @@ function LoginForm(){
                         <input type="password" className="form-control logInput" ref={passRef}/>
                       </div>
                       <div className="signLogCont">
-                      <Link to='/signup' className="signupA" onClick={dismissModal}>Sign up</Link>
-                      <button className="signinModal" onClick={login}>Sign in</button>
+                        <div className="forgotSign">
+                          <Link to='/newpassword' className="newPassword" onClick={dismissModal}>Forgot password?</Link>
+                          <Link to='/signup' className="signupA" onClick={dismissModal}>Sign up</Link>
+                        </div>
+                        <button className="signinModal" onClick={login}>Sign in</button>
                       </div>
                     </form>
                   </div>
