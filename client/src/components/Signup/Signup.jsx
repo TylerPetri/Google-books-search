@@ -10,6 +10,8 @@ function SignUpPage(){
     const [exists, setExists] = useState(false)
     const userRef = useRef()
     const passRef = useRef()
+    const questionRef = useRef()
+    const answerRef = useRef()
     let history = useHistory()
 
     async function signup(e){
@@ -17,7 +19,9 @@ function SignUpPage(){
 
         const data = {
             username: userRef.current.value,
-            password: passRef.current.value
+            password: passRef.current.value,
+            question: questionRef.current.value,
+            answer: answerRef.current.value,
         }
 
         const fetchOptions = {
@@ -51,7 +55,7 @@ function SignUpPage(){
         <Login/>
         <div className="signUpContainer">
             <form className="signUpForm">
-                <h5 className="upr" style={{display: required ? 'block' : 'none'}}>Username & password required</h5>
+                <h5 className="upr" style={{display: required ? 'block' : 'none'}}>All fields required</h5>
                 <h5 className="upr" style={{display: exists ? 'block' : 'none'}}>Username already taken</h5>
                 <div>
                     <label htmlFor="username" className="form-label">
@@ -60,7 +64,7 @@ function SignUpPage(){
                             <h3 className="dev2">name</h3>
                         </div>
                     </label>
-                    <input className="form-control signupInput" ref={userRef}/>
+                    <input className="form-control signupInput" ref={userRef} spellCheck="false"/>
                 </div>
                 <div>
                     <label htmlFor="password" className="form-label">
@@ -69,7 +73,25 @@ function SignUpPage(){
                             <h3 className="dev2">word</h3>
                         </div>
                     </label>
-                    <input type="password" className="form-control signupInput" ref={passRef}/>
+                    <input type="password" className="form-control signupInput" ref={passRef} spellCheck="false"/>
+                </div>
+                <div>
+                    <label htmlFor="password" className="form-label">
+                        <div className="labels">
+                            <h3 className="dev1">Secret </h3>
+                            <h3 className="dev2">Question</h3>
+                        </div>
+                    </label>
+                    <input className="form-control signupInput" ref={questionRef} spellCheck="false"/>
+                </div>
+                <div>
+                    <label htmlFor="password" className="form-label">
+                        <div className="labels">
+                            <h3 className="dev1">Ans</h3>
+                            <h3 className="dev2">wer</h3>
+                        </div>
+                    </label>
+                    <input type="password" className="form-control signupInput" ref={answerRef} spellCheck="false"/>
                 </div>
                     <button className="signupBTN" onClick={signup}>Sign up</button>
             </form>

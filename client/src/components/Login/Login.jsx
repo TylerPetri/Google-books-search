@@ -98,7 +98,7 @@ function LoginForm(){
                       </div>
                       <div className="signLogCont">
                         <div className="forgotSign">
-                          <Link to='/newpassword' className="newPassword" onClick={dismissModal}>Forgot password?</Link>
+                          <Link to='/newpasswordAuth' className="newPassword" onClick={dismissModal}>Forgot password?</Link>
                           <Link to='/signup' className="signupA" onClick={dismissModal}>Sign up</Link>
                         </div>
                         <button className="signinModal" onClick={login}>Sign in</button>

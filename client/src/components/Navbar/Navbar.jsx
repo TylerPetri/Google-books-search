@@ -9,6 +9,7 @@ import Search from '../Search/Search'
 import Library from '../Library/Library'
 import SignUp from '../Signup/Signup'
 import Button from '../Login/Button'
+import ForgotPasswordAuth from '../ForgotPassword/ForgotPassword'
 import { useStoreContext } from '../../utils/GlobalStore'
 
 import './Navbar.css'
@@ -280,6 +281,7 @@ function Navbar() {
                 <Route exact path='/' component={Search}/>
                 <Route exact path='/saved' component={Library}/>
                 <Route exact path='/signup' component={SignUp}/>
+                <Route exact path='/newpasswordAuth' component={ForgotPasswordAuth}/>
             </div>
         </>
     )
