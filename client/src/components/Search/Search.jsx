@@ -8,8 +8,8 @@ import Login from '../Login/Login'
 
 function Search() {
 
-    const [{searchResults, username, log}, dispatch] = useStoreContext()
-    const [saved, setBooks] = useState([])
+    const [{searchResults, username, log, saved}, dispatch] = useStoreContext()
+    // const [saved, setBooks] = useState([])
     const [cleanup, setStop] = useState(false)
     const savedList = saved.map(a=>a.title)
 
@@ -18,12 +18,14 @@ function Search() {
         const res = await fetchJSON('/api/books')
         if (res.message === "Auth failed") {
             dispatch({type:'LOG_FALSE'})
+            // setBooks([])
             localStorage.removeItem('usernameGoogleBooksTP')
             localStorage.removeItem('tokenGoogleBooksTP')
         } else if (cleanup) {
             return
         } else {
-            setBooks(res)
+            dispatch({type:'SAVED_BOOKS', data: {saved: res}})
+            // setBooks(res)
             setStop(true)
         }
     }
@@ -36,7 +38,8 @@ function Search() {
     function saveBook(res){
         fetchJSON('/api/books', 'post', {res, username})
         setStop(false)
-        setBooks([...saved, 'reload'])
+        // setBooks([...saved, 'reload'])
+        dispatch({type:'SAVED_BOOKS', data: {saved: [...saved, 'reload']}})
     }
 
     function renderDesc(book){

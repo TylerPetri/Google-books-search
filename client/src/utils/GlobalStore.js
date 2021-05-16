@@ -5,6 +5,7 @@ const initialData = {
   username: "",  
   token: "", 
   searchResults: {},
+  saved: [],
   modal: false,
   log: false,
   dropDown: false,
@@ -18,10 +19,13 @@ const dataReducer = (state, action) => {
     case "USER_LOGIN":
       return { ...state, ...action.data }
     case "USER_LOGOUT":
+      window.location.href = '/'
       localStorage.removeItem('usernameGoogleBooksTP')
       localStorage.removeItem('tokenGoogleBooksTP')
-      return { ...state, name:"", token:"", log:false, noEntry: true }
+      return { ...state, name:"", token:"", saved:[], log:false, noEntry: true }
     case "setSearchResults":
+      return { ...state, ...action.data}
+    case "SAVED_BOOKS":
       return { ...state, ...action.data}
     case "SHOW_MODAL":
       return { ...state, modal:true}
