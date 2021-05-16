@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useStoreContext } from '../../utils/GlobalStore'
 import Login from '../Login/Login'
 
 import './ForgotPassword.css'
@@ -7,11 +8,11 @@ import './ForgotPassword.css'
 
 function ForgotPasswordAuthPage(){
 
+    const [{tempUser}, dispatch] = useStoreContext()
     const [required, setRequired] = useState(false)
     const [incorrect, setIncorrect] = useState(false)
     const [auth, setAuth] = useState(false)
     const [show, setShow] = useState(false)
-    const [username, setUsername] = useState("")
     const [question, setQuestion] = useState("")
     const userRef = useRef()
     const questionRef = useRef()
@@ -32,14 +33,13 @@ function ForgotPasswordAuthPage(){
           fetchOptions.body = JSON.stringify(data)
         
         const res = await fetch('/questionReq', fetchOptions).then(r=>r.json())
-        console.log(res)
         if (res.message === 'No such being!') {
             userRef.current.value = ''
             setAuth(true)
             upAuth()
         } else {
             setQuestion(res.message + "?")
-            setUsername(userRef.current.value)
+            dispatch({type:"TEMP_USER", data: {tempUser: userRef.current.value}})
             setShow(true)
         }
     }
@@ -48,7 +48,7 @@ function ForgotPasswordAuthPage(){
         e.preventDefault()
 
         const data = {
-            username: username,
+            username: tempUser,
             question: question,
             answer: answerRef.current.value
         }
@@ -60,7 +60,6 @@ function ForgotPasswordAuthPage(){
         fetchOptions.body = JSON.stringify(data)
 
         const res = await fetch('/answerAuth', fetchOptions).then(r=>r.json())
-        console.log(res)
         if (res.message === 'No such being!') {
             setAuth(true)
             upAuth()
@@ -73,6 +72,7 @@ function ForgotPasswordAuthPage(){
             answerRef.current.value = ''
             uprequire()
         } else {
+            localStorage.googlebooksapi9000temp = res.token
             history.push('/newpassword')
         }
     }
@@ -105,7 +105,7 @@ function ForgotPasswordAuthPage(){
                         </div>
                     </label>
                     <input className="form-control logInput" ref={userRef}/>
-                    <button className="signupBTN" onClick={requestQuestion}>request</button>
+                    <button className="signupBTN" onClick={requestQuestion}>Request</button>
                 </div>
                 <div style={{display: show ? 'block' : 'none'}}>
                     <label className="form-label">

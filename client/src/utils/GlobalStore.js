@@ -1,9 +1,9 @@
 import React, { createContext, useReducer, useContext } from "react"
 
-// any variables we depend on for UI/flow we must pre-set
 const initialData = {
   username: "",  
   token: "", 
+  tempUser: "",
   searchResults: {},
   saved: [],
   modal: false,
@@ -23,6 +23,8 @@ const dataReducer = (state, action) => {
       localStorage.removeItem('usernameGoogleBooksTP')
       localStorage.removeItem('tokenGoogleBooksTP')
       return { ...state, name:"", token:"", saved:[], log:false, noEntry: true }
+    case "TEMP_USER":
+      return { ...state, ...action.data}
     case "setSearchResults":
       return { ...state, ...action.data}
     case "SAVED_BOOKS":

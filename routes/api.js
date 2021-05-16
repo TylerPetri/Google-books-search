@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 const router = require('express').Router();
 const { Books, User } = require('../models/index')
 const checkAuth = require('./auth')
+const tempAuth = require('./temp-auth')
 
 
 router.get('/api/books', checkAuth, (req,res) => {
@@ -180,7 +181,8 @@ router.post('/answerAuth', (req, res) => {
             }
           );
           return res.status(200).json({
-            message: 'Auth successful'
+            message: 'Auth successful',
+            token
           })
         } else {
           res.status(401).json({
@@ -198,6 +200,32 @@ router.post('/answerAuth', (req, res) => {
   })
 })
 
+router.put('/newpassword', tempAuth, (req, res) => {
+  bcrypt.hash(req.body.password, 10, (err, hash) => {
+    if (err) {
+      return res.status(500).json({
+        error: err,
+      })
+    } else if (req.body.password.length < 1) {
+      return res.status(401).json({
+        message: 'Password required!'
+      })
+    } else {
+      User.findOneAndUpdate({username: req.body.username}, {password: hash}, {new: true})
+        .exec()
+        .then( result => {
+            res.status(201).json({
+                message: 'User updated'
+            })
+        })
+        .catch(err => {
+            res.status(500).json({
+                error: err
+            })
+        })
+    }
+  })
+})
 
 router.delete("/:userId", (req, res, next) => {
   User.remove({ _id: req.params.userId })
