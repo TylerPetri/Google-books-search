@@ -19,7 +19,7 @@ function LoginButton() {
         
             <div className="logdiv">
               <button type="button" className="signinBtn" onClick={toggleDropDown} style={{backgroundColor: dropDown ? 'purple' : 'rgb(224, 105, 253)', color: dropDown ? 'rgb(224, 105, 253)' : 'purple'}}>
-                      {username}
+                      {username.length > 7 ? username.substring(0, 7) + '..' : username}
               </button>
             </div>
             
