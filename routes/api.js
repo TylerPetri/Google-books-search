@@ -10,6 +10,7 @@ const tempAuth = require('./temp-auth')
 
 
 router.get('/api/books', checkAuth, (req,res) => {
+  if (req.userData.username === req.headers.username){
     Books.find({username: req.headers.username})
     .then( booksDB => {
         res.json(booksDB);
@@ -17,6 +18,11 @@ router.get('/api/books', checkAuth, (req,res) => {
     .catch((err) => {
         res.json(err);
       });
+  } else {
+    res.status(401).json({
+      message: 'Auth failed'
+    })
+  }
 })
 
 router.post('/api/books', (req,res) => {
@@ -190,41 +196,47 @@ router.post('/answerAuth', (req, res) => {
           })
         }
       })
-      .catch((err) => {
-        console.log(err)
-        res.status(500).json({
-          error: err
-        })
-      })
     }
+  })
+  .catch((err) => {
+    console.log(err)
+    res.status(500).json({
+      error: err
+    })
   })
 })
 
 router.put('/newpassword', tempAuth, (req, res) => {
-  bcrypt.hash(req.body.password, 10, (err, hash) => {
-    if (err) {
-      return res.status(500).json({
-        error: err,
-      })
-    } else if (req.body.password.length < 1) {
-      return res.status(401).json({
-        message: 'Password required!'
-      })
-    } else {
-      User.findOneAndUpdate({username: req.body.username}, {password: hash}, {new: true})
-        .exec()
-        .then( result => {
-            res.status(201).json({
-                message: 'User updated'
-            })
+  if (req.userData.username === req.body.username) {
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+      if (err) {
+        return res.status(500).json({
+          error: err,
         })
-        .catch(err => {
-            res.status(500).json({
-                error: err
-            })
+      } else if (req.body.password.length < 1) {
+        return res.status(401).json({
+          message: 'Password required!'
         })
-    }
-  })
+      } else {
+        User.findOneAndUpdate({username: req.body.username}, {password: hash}, {new: true})
+          .exec()
+          .then( result => {
+              res.status(201).json({
+                  message: 'User updated'
+              })
+          })
+          .catch(err => {
+              res.status(500).json({
+                  error: err
+              })
+          })
+      }
+    })
+  } else {
+    res.status(401).json({
+      message: 'Auth failed'
+    })
+  }
 })
 
 router.delete("/:userId", (req, res, next) => {
