@@ -38,7 +38,7 @@ function ForgotPasswordAuthPage(){
             setAuth(true)
             upAuth()
         } else {
-            setQuestion(res.message + "?")
+            setQuestion(res.message)
             dispatch({type:"TEMP_USER", data: {tempUser: userRef.current.value}})
             setShow(true)
         }
